@@ -156,29 +156,16 @@
                     &::before {
                         content: '';
                         position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        border-radius: 20px;
-                        padding: 2px;
+                        top: -2px;
+                        left: -2px;
+                        right: -2px;
+                        bottom: -2px;
+                        border-radius: 22px;
                         background: linear-gradient(135deg, $primary-color, $secondary-color, $third-color);
                         opacity: 0;
                         transition: opacity 0.3s ease;
                         pointer-events: none;
-                    }
-                    
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        top: 2px;
-                        left: 2px;
-                        right: 2px;
-                        bottom: 2px;
-                        background: white;
-                        border-radius: 18px;
-                        opacity: 0;
-                        transition: opacity 0.3s ease;
+                        z-index: -1;
                     }
                     
                     &:hover {
@@ -186,10 +173,6 @@
                         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
                         
                         &::before {
-                            opacity: 1;
-                        }
-                        
-                        &::after {
                             opacity: 1;
                         }
                     }
