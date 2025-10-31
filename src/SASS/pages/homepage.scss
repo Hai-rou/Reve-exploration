@@ -163,8 +163,20 @@
                         border-radius: 20px;
                         padding: 2px;
                         background: linear-gradient(135deg, $primary-color, $secondary-color, $third-color);
-                        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                        mask-composite: exclude;
+                        opacity: 0;
+                        transition: opacity 0.3s ease;
+                        pointer-events: none;
+                    }
+                    
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 2px;
+                        left: 2px;
+                        right: 2px;
+                        bottom: 2px;
+                        background: white;
+                        border-radius: 18px;
                         opacity: 0;
                         transition: opacity 0.3s ease;
                     }
@@ -174,6 +186,10 @@
                         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
                         
                         &::before {
+                            opacity: 1;
+                        }
+                        
+                        &::after {
                             opacity: 1;
                         }
                     }
