@@ -1,0 +1,98 @@
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.testimonials-grid .testimonial-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid #E6D1B3;
+}
+.testimonials-grid .testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.testimonials-grid .testimonial-card .testimonial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.testimonials-grid .testimonial-card .testimonial-header .quote-icon {
+  font-size: 1.5rem;
+  color: #E6D1B3;
+  opacity: 0.7;
+}
+.testimonials-grid .testimonial-card .testimonial-header .stars {
+  display: flex;
+  gap: 3px;
+}
+.testimonials-grid .testimonial-card .testimonial-header .stars .star-filled {
+  color: #ffd700;
+}
+.testimonials-grid .testimonial-card .testimonial-header .stars .star-empty {
+  color: #ddd;
+}
+.testimonials-grid .testimonial-card .testimonial-comment {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #555;
+  text-align: left;
+}
+.testimonials-grid .testimonial-card .testimonial-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .client-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .client-info .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 2px solid #E6D1B3;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .client-info .client-details .client-name {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #8C6B4F;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .client-info .client-details .client-location {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 5px 0;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .client-info .client-details .trip-info {
+  font-size: 0.8rem;
+  color: #E6D1B3;
+  font-weight: 500;
+  margin: 0;
+}
+.testimonials-grid .testimonial-card .testimonial-footer .testimonial-date {
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
+  }
+  .testimonials-grid .testimonial-card {
+    padding: 20px;
+  }
+}/*# sourceMappingURL=testimonials.css.map */

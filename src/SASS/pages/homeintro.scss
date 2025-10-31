@@ -1,0 +1,111 @@
+@import "../variables";
+
+.home-intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 100vh;
+    perspective: 1200px; // ✅ Perspective 3D améliorée pour l'animation
+    perspective-origin: center center;
+
+    .face-one{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 31%;
+        height: 290px;
+        background-color: $enveloppe-light;
+        box-shadow: -3px 7px 15px 0px $third-color;
+        margin-bottom: 50px;
+
+        img{
+            width: 30%;
+            height: auto;
+        }
+
+        p{
+            text-transform: uppercase;
+        }
+
+        .bottom-env{
+            background-image: url('public/HomeIntro/basenv.webp');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 100%;
+            height: 100px;
+            background-color: $third-color;
+            border-top: 1px solid$third-color;
+        }
+    }
+    .face-two{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        width: 31%;
+        height: 290px;
+        background-color: $enveloppe-light;
+        margin-top: -50px;
+        box-shadow: -3px 7px 15px 0px $third-color;
+
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        transform-style: preserve-3d; // ✅ Support 3D
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        .top-env{
+            width: 100%;
+            height: 80px;
+            background-color: $third-color;
+            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            box-shadow: -3px 7px 15px 0px $third-color;
+            transform-origin: top center; // ✅ Point de rotation depuis le haut
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 10;
+
+            // Effet hover subtil
+            &:hover {
+                transform: rotateX(10deg);
+            }
+        }
+
+        .enve-detail{
+
+            padding: 30px;
+            position: relative;
+            z-index: 5;
+
+            .enve-info{
+                padding-top: 20px;
+                span{
+                    text-transform: uppercase;
+                }
+            }
+
+            .enter-btn {
+                background: linear-gradient(135deg, #D4A574 0%, #B8956A 100%);
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                cursor: pointer;
+                margin-top: 15px;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(212, 165, 116, 0.4);
+                }
+            }
+        }
+    }
+}

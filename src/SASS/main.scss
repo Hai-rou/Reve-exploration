@@ -1,0 +1,12 @@
+@import 'variables';
+
+html {
+    margin: 0;
+    padding: 0;
+    background-color:$primary-color;
+    body{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}

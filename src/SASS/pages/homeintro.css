@@ -1,0 +1,95 @@
+.home-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 100vh;
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+.home-intro .face-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 31%;
+  height: 290px;
+  background-color: #FBF0E1;
+  box-shadow: -3px 7px 15px 0px #8C6B4F;
+  margin-bottom: 50px;
+}
+.home-intro .face-one img {
+  width: 30%;
+  height: auto;
+}
+.home-intro .face-one p {
+  text-transform: uppercase;
+}
+.home-intro .face-one .bottom-env {
+  background-image: url("public/HomeIntro/basenv.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100px;
+  background-color: #8C6B4F;
+  border-top: 1px solid #8C6B4F;
+}
+.home-intro .face-two {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  width: 31%;
+  height: 290px;
+  background-color: #FBF0E1;
+  margin-top: -50px;
+  box-shadow: -3px 7px 15px 0px #8C6B4F;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  transform-style: preserve-3d;
+}
+.home-intro .face-two:hover {
+  transform: translateY(-3px);
+}
+.home-intro .face-two .top-env {
+  width: 100%;
+  height: 80px;
+  background-color: #8C6B4F;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  box-shadow: -3px 7px 15px 0px #8C6B4F;
+  transform-origin: top center;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+.home-intro .face-two .top-env:hover {
+  transform: rotateX(10deg);
+}
+.home-intro .face-two .enve-detail {
+  padding: 30px;
+  position: relative;
+  z-index: 5;
+}
+.home-intro .face-two .enve-detail .enve-info {
+  padding-top: 20px;
+}
+.home-intro .face-two .enve-detail .enve-info span {
+  text-transform: uppercase;
+}
+.home-intro .face-two .enve-detail .enter-btn {
+  background: linear-gradient(135deg, #D4A574 0%, #B8956A 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+.home-intro .face-two .enve-detail .enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 165, 116, 0.4);
+}/*# sourceMappingURL=homeintro.css.map */
