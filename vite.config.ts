@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/Reve-exploration/',
   css: {
     preprocessorOptions: {
       scss: {
@@ -14,6 +15,7 @@ export default defineConfig({
   build: {
     target: 'es2015',
     cssTarget: 'chrome80',
+    outDir: 'dist',
     rollupOptions: {
       output: {
         manualChunks: undefined,
