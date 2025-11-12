@@ -81,7 +81,9 @@ function Homeintro({ onEnter }: HomeintroProps) {
       </div>
       
       <div className="face-two" onClick={handleEnvelopeClick}>
-        <div className="top-env" ref={topEnvRef}></div>
+        <div className="top-env" ref={topEnvRef}>
+          <span className='entree'>Voyagez avec nous</span>
+        </div>
         <div className="enve-detail" ref={enveDetailRef}>
           <p>contact@reves-exploration.com</p>
           <p>06 70 80 60 20</p>
