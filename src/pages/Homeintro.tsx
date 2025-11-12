@@ -82,7 +82,7 @@ function Homeintro({ onEnter }: HomeintroProps) {
       
       <div className="face-two" onClick={handleEnvelopeClick}>
         <div className="top-env" ref={topEnvRef}>
-          <span className='entree'>Voyagez avec nous</span>
+          <span className='entree'>Voyager avec nous</span>
         </div>
         <div className="enve-detail" ref={enveDetailRef}>
           <p>contact@reves-exploration.com</p>
