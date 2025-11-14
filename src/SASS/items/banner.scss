@@ -4,9 +4,139 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 600px;
-    img{
-        width: auto;
-        height: 80%;  
+    height: 700px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    
+    // Image de fond avec overlay sombre pour la lisibilité
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+        url('/image/passport-2714675.jpg') center/cover no-repeat;
+
+
+
+    .container {
+        text-align: center;
+        position: relative;
+    }
+
+    .word-stage {
+        position: relative;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .letter {
+        position: absolute;
+        left: 300px; // Centre du stage comme point de référence
+        top: 150px; // Centre vertical du stage
+        font-size: 70px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform-origin: center center;
+        z-index: 10; // Au-dessus de tout
+    }
+
+    .letter.explode {
+        animation: explode 0.8s forwards;
+    }
+
+    @keyframes explode {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        100% {
+            transform: translate(var(--tx), var(--ty)) rotate(var(--rotation)) scale(1.5);
+            opacity: 0.3;
+        }
+    }
+
+    .letter.morph {
+        animation: morphIn 1s forwards;
+    }
+
+    @keyframes morphIn {
+        0% {
+            opacity: 0;
+            transform: translate(var(--from-x), var(--from-y)) rotate(720deg) scale(0);
+        }
+        100% {
+            opacity: 1;
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+    }
+
+    .letter.pivot {
+        color: #FFD700;
+        filter: drop-shadow(0 0 30px #FFD700);
+        animation: pivotSpin 2s ease-in-out;
+    }
+
+    @keyframes pivotSpin {
+        0%, 100% { transform: rotate(0deg) scale(1); }
+        25% { transform: rotate(180deg) scale(1.8); }
+        50% { transform: rotate(360deg) scale(1.5); }
+        75% { transform: rotate(540deg) scale(1.8); }
+    }
+
+    button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        transition: all 0.3s;
+        margin-top: 30px;
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+    }
+
+    .info {
+        color: white;
+        margin-top: 25px;
+        font-size: 16px;
+        opacity: 0.9;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+
+        &.active {
+            animation: particleFloat 1.5s forwards;
+        }
+    }
+
+    @keyframes particleFloat {
+        0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(var(--px), var(--py)) scale(0);
+        }
     }
 }
