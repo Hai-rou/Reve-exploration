@@ -24,10 +24,14 @@ function Banner() {
 
     // Définir les paires de mots avec leur lettre pivot
     const wordPairs = [
-      { word1: "IRLANDE", word2: "PARIS", pivotLetter: "R" },
+      { word1: "REVE D'EXPLORATION", word2: "PARIS", pivotLetter: "R" },
       { word1: "PARIS", word2: "ROME", pivotLetter: "R" },
-      { word1: "ROME", word2: "MAROC", pivotLetter: "R" },
       { word1: "MAROC", word2: "NEW YORK", pivotLetter: "R" },
+      { word1: "NEW YORK", word2: "REVE D'EXPLORATION", pivotLetter: "O" },
+      { word1: "ROME", word2: "MAROC", pivotLetter: "M" },
+      { word1: "MAROC", word2: "FLORIDE", pivotLetter: "R" },
+      { word1: "FLORIDE", word2: "REVE D'EXPLORATION", pivotLetter: "L" },
+      { word1: "REVE D'EXPLORATION", word2: "IRLANDE", pivotLetter: "E" },
     ];
     
     let currentPairIndex = 0;
@@ -179,8 +183,8 @@ function Banner() {
           // Relancer l'animation
           addTimeout(() => {
             startAnimation();
-          }, 2500);
-        }, 2500);
+          }, 3000);
+        }, 3000);
       }); // Fin du requestAnimationFrame
     }
 

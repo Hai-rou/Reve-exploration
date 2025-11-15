@@ -16,8 +16,8 @@ function App() {
         <Homeintro onEnter={() => setShowIntro(false)} />
       ) : (
         <BrowserRouter basename={import.meta.env.BASE_URL}>
-          <Banner />
           <Header />
+          <Banner />
           <AppRoutes />
           <Footer />
         </BrowserRouter>

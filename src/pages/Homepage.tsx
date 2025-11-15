@@ -32,7 +32,29 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      
+      {/* Introduction */}
+      <section className="introduction">
+        <h1>Bienvenue sur Rêve d'Exploration</h1>
+        <p>Votre portail vers des aventures inoubliables à travers le monde. Explorez nos destinations de rêve, planifiez votre voyage idéal et laissez-vous inspirer par nos suggestions personnalisées.</p>
+        <p>Découvrez des lieux uniques, des cultures fascinantes et des expériences mémorables pour chaque type de voyageur.</p>
+        <div className="etapes">
+            <div className="etape">
+            <p>Laissez libre cours à votre imagination et vos envies.</p>
+            </div>
+            <div className="etape">
+                <p>Planifiez votre voyage idéal avec nos outils intuitifs.</p>
+            </div>
+            <div className="etape">
+                <p>Laissez-vous inspirer par nos suggestions personnalisées.</p>
+            </div>
+            <div className="etape">
+                <p>Découvrez des lieux uniques et des cultures fascinantes.</p>
+            </div>
+            <div className="etape">
+                <p>Vivez des expériences mémorables pour chaque type de voyageur.</p>
+            </div>
+        </div>
+      </section>
       {/* Section Quand partir ? */}
       <section className="when-to-go">
         <div className="when-header">

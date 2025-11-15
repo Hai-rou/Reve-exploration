@@ -2,40 +2,64 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f4f0 0%, #e8ddd4 100%);
 }
-.homepage .hero-section {
-  background: transparent;
+.homepage .introduction {
+  padding: 50px 2% 50px;
 }
-.homepage .world {
-  position: relative;
-  padding: 80px 6% 60px;
-  background: white;
-}
-.homepage .world::before {
-  content: "Explorez le Monde";
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #8C6B4F;
+.homepage .introduction h1 {
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: white;
-  padding: 15px 30px;
-  border-radius: 25px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  font-size: 3rem;
+  color: #8C6B4F;
+  font-weight: 800;
 }
-.homepage .world .worldmap-container {
-  max-width: 1000px;
-  padding-top: 20px;
-  margin: 0 auto;
+.homepage .introduction p {
+  text-align: center;
+  color: #666;
+  max-width: 800px;
+  margin: 20px auto 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+.homepage .introduction .etapes {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  counter-reset: step;
+}
+.homepage .introduction .etapes .etape {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 3px solid rgba(230, 209, 179, 0.2);
+  padding: 30px 20px;
+  width: 200px;
+  height: 90px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+}
+.homepage .introduction .etapes .etape::after {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
 }
 .homepage .specialties-section {
   padding: 100px 6% 80px;
@@ -59,6 +83,7 @@
   z-index: 2;
 }
 .homepage .specialties-section .specialties-header h2 {
+  position: relative;
   font-size: 3rem;
   font-weight: 800;
   color: #8C6B4F;
@@ -280,7 +305,7 @@
 }
 .homepage .when-to-go {
   padding: 80px 6% 60px;
-  background: #fff;
+  background: url("public/image/sunset-7133867.jpg") #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -289,13 +314,15 @@
   margin-bottom: 30px;
 }
 .homepage .when-to-go .when-header h2 {
-  font-size: 2.2rem;
-  color: #8C6B4F;
+  font-size: 3rem;
+  color: #E6D1B3;
   margin: 0 0 8px;
   font-weight: 800;
 }
 .homepage .when-to-go .when-header p {
-  color: #666;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
   margin: 0;
 }
 .homepage .when-to-go .month-chips {
