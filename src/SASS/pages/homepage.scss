@@ -1,642 +1,706 @@
-﻿// Homepage SCSS - Style moderne pour les spécialités
+﻿// Homepage SCSS – Sections alignées avec Homepage.tsx
 @import '../variables';
 
 .homepage {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f8f4f0 0%, #e8ddd4 100%);
-    
-    .introduction{
-        padding: 50px 2% 50px;
-        h1 {
-            text-align: center;
-            font-size: 3rem;
-            color: $third-color;
-            font-weight: 800;
-        }
-        p{
-            text-align: center;
-            color: #666;
-            max-width: 800px;
-            margin: 20px auto 0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-        .etapes{
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            counter-reset: step;
-            .etape{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background: rgba(white, 0.95);
-                border-radius: 20px;
-                padding: 30px 20px;
-                width: 200px;
-                height: 90px;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-                transition: all 0.3s ease;
-                border: 3px solid transparent;
-                position: relative;
+  // Base
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f4f0 0%, #e8ddd4 100%);
 
-                &::after{
-                    content: counter(step);
-                    counter-increment: step;
-                    position: absolute;
-                    top: -10px;
-                    right: -10px;
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    display: grid;
-                    place-items: center;
-                    font-weight: 800;
-                    font-size: 0.9rem;
-                    color: #fff;
-                    background: linear-gradient(135deg, $primary-color, $secondary-color);
-                    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-                    border: 2px solid #fff;
-                }
-            }
-        }
+  // 1) Introduction
+  .introduction {
+    padding: 50px 2% 50px;
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: $third-color;
+      font-weight: 800;
     }
-    
-    // Section Spécialités Modernes
-    .specialties-section {
-        padding: 100px 6% 80px;
-        background: linear-gradient(135deg, #f8f6f3 0%, #f1ede8 100%);
+
+    p {
+      text-align: center;
+      color: #666;
+      max-width: 800px;
+      margin: 20px auto 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .etapes {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      counter-reset: step;
+
+      .etape {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(white, 0.95);
+        border-radius: 20px;
+        padding: 30px 20px;
+        width: 200px;
+        height: 90px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        border: 3px solid transparent;
         position: relative;
-        
+
+        &::after {
+          content: counter(step);
+          counter-increment: step;
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          font-weight: 800;
+          font-size: 0.9rem;
+          color: #fff;
+          background: linear-gradient(135deg, $primary-color, $secondary-color);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+          border: 2px solid #fff;
+        }
+      }
+    }
+  }
+
+  // 2) Séparateur visuel
+  .section-sep {
+    height: 1px;
+    margin: 30px auto 40px;
+    width: min(1100px, 92%);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.12), transparent);
+  }
+
+  // 3) Quand partir ?
+  .when-to-go {
+    padding: 80px 6% 60px;
+    background:
+      url('public/image/sunset-7133867.jpg')
+      #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    .when-header {
+      text-align: center;
+      margin-bottom: 30px;
+
+      h2 {
+        font-size: 3rem;
+        color: $primary-color;
+        margin: 0 0 8px;
+        font-weight: 800;
+      }
+      p {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    .month-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 24px;
+      max-width: 900px;
+
+      .month-chip {
+        appearance: none;
+        border: 1px solid rgba($primary-color, 0.25);
+        background: #fff;
+        color: $third-color;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        &.active {
+          background: linear-gradient(135deg, $primary-color, $secondary-color);
+          color: #fff;
+          border-color: transparent;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        }
+      }
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #777;
+      padding: 20px 0 0;
+    }
+
+    // Grille des cartes 
+    .specialty-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-top: 30px;
+      padding: 0 20px;
+
+      .card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border: 2px solid transparent;
+        position: relative;
+
         &::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          border-radius: 22px;
+          background: linear-gradient(135deg, $primary-color, $secondary-color, $third-color);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        &:hover {
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+
+          &::before { opacity: 1; }
+        }
+
+        .card-image {
+          position: relative;
+          height: 250px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: brightness(0.9);
+          }
+
+          .card-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(
+              to bottom,
+              transparent 0%,
+              transparent 60%,
+              rgba(0, 0, 0, 0.7) 100%
+            );
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+
+            .location-badge {
+              background: rgba(255, 255, 255, 0.95);
+              color: $third-color;
+              padding: 8px 16px;
+              border-radius: 25px;
+              font-size: 0.85rem;
+              font-weight: 600;
+              backdrop-filter: blur(10px);
+              border: 1px solid rgba($primary-color, 0.3);
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+          }
+
+          &:hover {
+            .card-overlay { opacity: 1; }
+            img { transform: scale(1.1); filter: brightness(1.1); }
+          }
+        }
+
+        .card-content {
+          padding: 25px;
+          background: white;
+
+          h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: $third-color;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+          }
+
+          p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+
+  // Voyage signature (travel-together)
+  .travel-together {
+    padding: 5% 6% 5%;
+    background-color: $secondary-color;
+
+    .signature-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .signature-media {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.9);
+        transform: scale(1.02);
+      }
+
+      .media-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 6px;
+        padding: 22px;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(0,0,0,0.5) 100%);
+
+        .badge {
+          align-self: flex-start;
+          background: rgba(255,255,255,0.95);
+          color: $third-color;
+          padding: 6px 12px;
+          border-radius: 999px;
+          font-size: 0.85rem;
+          font-weight: 700;
+          border: 1px solid rgba($primary-color, 0.3);
+          text-transform: uppercase;
+          letter-spacing: .5px;
+        }
+
+        h2 {
+          color: #fff;
+          margin: 0;
+          font-size: 2rem;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+        }
+
+        p { color: #f2f2f2; margin: 0; }
+      }
+    }
+
+    .signature-content {
+      padding: 22px;
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+
+        .fact {
+          background: #fafafa;
+          border: 1px solid rgba(0,0,0,0.04);
+          border-radius: 12px;
+          padding: 10px 12px;
+          color: #444;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+
+      .highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+
+        .chip {
+          background: #fff;
+          border: 1px solid rgba($primary-color, 0.25);
+          color: $third-color;
+          padding: 6px 10px;
+          border-radius: 999px;
+          font-size: 0.85rem;
+        }
+      }
+
+      .itinerary {
+        margin-top: 6px;
+        margin-bottom: 14px;
+
+        h3 {
+          margin: 0 0 10px;
+          color: $third-color;
+          font-weight: 800;
+        }
+
+        // Roadmap avec "route" centrale
+        .roadmap {
+          position: relative;
+          max-width: 980px;
+          margin: 0 auto;
+          padding: 10px 0 10px;
+          list-style: none;
+
+          // Route (asphalte)
+          &::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba($primary-color, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba($secondary-color, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .specialties-header {
-            text-align: center;
-            margin-bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            background: linear-gradient(180deg, #3b3b3b, #2f2f2f);
+            border-radius: 999px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+          }
+
+          // Marquage central (pointillés)
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            background: repeating-linear-gradient(
+              to bottom,
+              rgba(255,255,255,0.9) 0 14px,
+              rgba(255,255,255,0) 14px 28px
+            );
+            border-radius: 2px;
+            opacity: .9;
+          }
+
+          .stop {
             position: relative;
-            z-index: 2;
-            
-            h2 {
-                position: relative;
-                font-size: 3rem;
-                font-weight: 800;
-                color: $third-color;
-                margin-bottom: 20px;
-                line-height: 1.2;
-                letter-spacing: -1px;
-                
-                &::after {
-                    content: '';
-                    display: block;
-                    width: 100px;
-                    height: 4px;
-                    background: linear-gradient(90deg, $primary-color, $secondary-color);
-                    margin: 30px auto;
-                    border-radius: 2px;
-                    box-shadow: 0 2px 10px rgba($primary-color, 0.3);
-                }
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 0;
+
+            .dot {
+              position: absolute;
+              left: 50%;
+              top: 32px;
+              transform: translateX(-50%);
+              width: 14px;
+              height: 14px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, $primary-color, $secondary-color);
+              box-shadow: 0 0 0 5px rgba($primary-color, 0.15);
+              animation: pulseRing 2s infinite ease-out;
+
+              &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                box-shadow: 0 0 0 0 rgba($secondary-color, 0.3);
+                animation: ringExpand 2.2s infinite ease-out;
+              }
             }
-            
-            p {
-                font-size: 1.2rem;
-                color: #666;
-                max-width: 600px;
-                margin: 0 auto;
-                line-height: 1.6;
-                opacity: 0.9;
+
+            .content {
+              background: #fff;
+              border: 1px solid rgba(0,0,0,0.06);
+              border-radius: 12px;
+              padding: 12px 14px;
+              box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+              max-width: 420px;
+
+              strong { display: block; color: $third-color; }
+              span { display: block; font-size: .95rem; color: #555; }
             }
+
+            &.left {
+              .content { grid-column: 1; justify-self: end; text-align: right; }
+            }
+            &.right {
+              .content { grid-column: 2; justify-self: start; text-align: left; }
+            }
+
+            // Modal flottante apparente au hover/focus
+            .hover-modal {
+              position: absolute;
+              left: 50%;
+              top: -8px;
+              transform: translate(-50%, -10px) scale(0.98);
+              width: min(480px, 86vw);
+              background: #fff;
+              border: 1px solid rgba(0,0,0,0.08);
+              border-radius: 14px;
+              padding: 14px 16px;
+              box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+              opacity: 0;
+              pointer-events: none;
+              transition: opacity .18s ease, transform .18s ease;
+              z-index: 5;
+
+              h4 { margin: 0 0 6px; color: $third-color; font-weight: 800; }
+              p { margin: 0 0 10px; color: #555; }
+              .btn-primary { padding: 8px 12px; border-radius: 10px; background: linear-gradient(135deg, $primary-color, $secondary-color); color: #fff; border: 0; cursor: pointer; }
+            }
+
+            &:hover .hover-modal,
+            &:focus-within .hover-modal {
+              opacity: 1;
+              transform: translate(-50%, -16px) scale(1);
+            }
+
+            // Accent au survol
+            &:hover .content { box-shadow: 0 10px 26px rgba(0,0,0,0.12); }
+          }
         }
-        
-        .specialty-group {
-            max-width: 1500px;
-            margin: 0 auto 80px;
+
+        @media (max-width: 768px) {
+          .roadmap {
+            &::before { width: 28px; }
+            &::after { width: 3px; }
+
+            .stop {
+              grid-template-columns: 1fr;
+              padding: 14px 0 22px;
+
+              .content { max-width: none; text-align: left; justify-self: stretch; }
+            }
+          }
+        }
+      }
+
+      // Animations
+      @keyframes pulseRing {
+        0% { box-shadow: 0 0 0 5px rgba($primary-color, 0.15); }
+        50% { box-shadow: 0 0 0 9px rgba($primary-color, 0.08); }
+        100% { box-shadow: 0 0 0 5px rgba($primary-color, 0.15); }
+      }
+
+      @keyframes ringExpand {
+        0% { box-shadow: 0 0 0 0 rgba($secondary-color, 0.0); opacity: 0.6; }
+        60% { box-shadow: 0 0 0 16px rgba($secondary-color, 0.0); opacity: 0; }
+        100% { box-shadow: 0 0 0 0 rgba($secondary-color, 0.0); opacity: 0; }
+      }
+
+      .includes {
+        h3 { margin: 0 0 10px; color: $third-color; font-weight: 800; }
+
+        .include-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 8px 14px;
+          margin: 0 0 12px;
+          padding: 0;
+          list-style: none;
+
+          li {
             position: relative;
-            z-index: 2;
-            
-            .specialty-title {
-                font-size: 2.2rem;
-                color: $third-color;
-                margin-bottom: 40px;
-                text-align: center;
-                font-weight: 700;
-                position: relative;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: -15px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 80px;
-                    height: 3px;
-                    background: linear-gradient(90deg, $secondary-color, $primary-color);
-                    border-radius: 2px;
-                }
-                
-                &::after {
-                    content: '';
-                    position: absolute;
-                    bottom: -18px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 40px;
-                    height: 2px;
-                    background: $third-color;
-                    border-radius: 1px;
-                }
+            padding-left: 26px;
+            color: #444;
+
+            &::before {
+              content: '✔';
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: $primary-color;
+              font-weight: 700;
             }
-            
-            .specialty-cards {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 35px;
-                margin-top: 50px;
-                padding: 0 20px;
-            
-                .card {
-                    background: white;
-                    border-radius: 20px;
-                    overflow: hidden;
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-                    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                    border: 2px solid transparent;
-                    position: relative;
-                    
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        top: -2px;
-                        left: -2px;
-                        right: -2px;
-                        bottom: -2px;
-                        border-radius: 22px;
-                        background: linear-gradient(135deg, $primary-color, $secondary-color, $third-color);
-                        opacity: 0;
-                        transition: opacity 0.3s ease;
-                        pointer-events: none;
-                        z-index: -1;
-                    }
-                    
-                    &:hover {
-                        transform: translateY(-10px) scale(1.02);
-                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-                        
-                        &::before {
-                            opacity: 1;
-                        }
-                    }
-                    
-                    .card-image {
-                        position: relative;
-                        height: 250px;
-                        overflow: hidden;
-                        
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            transition: all 0.5s ease;
-                            filter: brightness(0.9);
-                        }
-                        
-                        .card-overlay {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            background: linear-gradient(
-                                to bottom,
-                                transparent 0%,
-                                transparent 60%,
-                                rgba(0, 0, 0, 0.7) 100%
-                            );
-                            display: flex;
-                            align-items: flex-end;
-                            padding: 20px;
-                            opacity: 0;
-                            transition: all 0.3s ease;
-                            
-                            .location-badge {
-                                background: rgba(255, 255, 255, 0.95);
-                                color: $third-color;
-                                padding: 8px 16px;
-                                border-radius: 25px;
-                                font-size: 0.85rem;
-                                font-weight: 600;
-                                backdrop-filter: blur(10px);
-                                border: 1px solid rgba($primary-color, 0.3);
-                                text-transform: uppercase;
-                                letter-spacing: 0.5px;
-                                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                            }
-                        }
-                        
-                        &:hover {
-                            .card-overlay {
-                                opacity: 1;
-                            }
-                            
-                            img {
-                                transform: scale(1.1);
-                                filter: brightness(1.1);
-                            }
-                        }
-                    }
-                    
-                    .card-content {
-                        padding: 25px;
-                        background: white;
-                        
-                        h4 {
-                            font-size: 1.4rem;
-                            font-weight: 700;
-                            color: $third-color;
-                            margin-bottom: 12px;
-                            line-height: 1.3;
-                            letter-spacing: -0.5px;
-                        }
-                        
-                        p {
-                            color: #666;
-                            font-size: 0.95rem;
-                            line-height: 1.6;
-                            margin: 0;
-                            opacity: 0.9;
-                        }
-                    }
-                }
-            }
+          }
         }
+
+        .note { color: #666; margin: 0 0 10px; }
+        .btn-primary { padding: 10px 16px; border-radius: 10px; background: linear-gradient(135deg, $primary-color, $secondary-color); color: #fff; border: 0; cursor: pointer; }
+      }
     }
-    
-    // Section Découverte Rapide
-    .quick-discovery {
-        padding: 80px 6% 60px;
+  }
+
+  // 4) Pourquoi nous choisir
+  .why-us {
+    max-width: 1200px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 0 6%;
+
+    h2 { margin-bottom: 18px; color: $third-color; font-weight: 800; }
+
+    .features-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      padding: 18px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+      .feature-emoji { font-size: 28px; margin-bottom: 8px; }
+      h3 { margin: 6px 0 6px; font-size: 18px; color: $third-color; }
+      p { margin: 0; color: #555; }
+
+      &:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); }
+    }
+  }
+
+  // 5) Témoignages
+  .testimonials {
+    max-width: 1100px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 0 6%;
+
+    h2 { color: $third-color; font-weight: 800; margin-bottom: 18px; }
+
+    .testi-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .testi {
+      margin: 0;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: left;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+
+      p { margin: 0 0 8px; font-style: italic; color: #444; }
+      cite { opacity: 0.9; font-size: 14px; color: #666; }
+    }
+  }
+
+  // 6) CTA prise de rendez-vous
+  .cta-booking {
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    h2 { color: $third-color; font-weight: 800; margin: 0 0 6px; }
+    p { color: #555; margin: 0 0 10px; }
+
+    .btn-primary {
+      margin-top: 10px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, $primary-color, $secondary-color);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18); }
+  }
+
+  // 7) Newsletter
+  .newsletter {
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 0 6%;
+
+    h2 { color: $third-color; font-weight: 800; margin-bottom: 6px; }
+    p { color: #666; margin: 0; }
+
+    .newsletter-form {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      input {
+        min-width: 260px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: #fff;
+        color: #333;
+      }
+
+      .btn-primary {
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: #fff;
+        border: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // 8) FAQ
+  .faq {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 6% 20px;
+
+    h2 { color: $third-color; font-weight: 800; margin-bottom: 14px; text-align: center; }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+
+      details {
         background: white;
-        
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: $third-color;
-            margin-bottom: 50px;
-            font-weight: 700;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        padding: 12px 14px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+
+        summary {
+          cursor: pointer;
+          font-weight: 600;
+          outline: none;
         }
-        
-        .travel-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-            
-            .quick-card {
-                background: white;
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-                transition: all 0.3s ease;
-                border: 1px solid rgba($primary-color, 0.1);
-                
-                &:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-                }
-                
-                img {
-                    width: 100%;
-                    height: 200px;
-                    object-fit: cover;
-                    transition: transform 0.3s ease;
-                }
-                
-                &:hover img {
-                    transform: scale(1.05);
-                }
-                
-                .quick-card-content {
-                    padding: 20px;
-                    
-                    h5 {
-                        font-size: 1.1rem;
-                        color: $third-color;
-                        margin-bottom: 8px;
-                        font-weight: 600;
-                    }
-                    
-                    .location {
-                        color: #888;
-                        font-size: 0.9rem;
-                    }
-                }
-            }
-        }
+
+        p { margin: 8px 0 0; color: #555; }
+      }
     }
-    
-    // Section Quand partir ?
-    .when-to-go {
-        padding: 80px 6% 60px;
-        background:
-            url('public/image/sunset-7133867.jpg')
-        #fff;
-        border-top: 1px solid rgba(0,0,0,0.06);
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-
-        .when-header {
-            text-align: center;
-            margin-bottom: 30px;
-
-            h2 {
-                font-size: 3rem;
-                color: $primary-color;
-                margin: 0 0 8px;
-                font-weight: 800;
-            }
-            p {
-                color: white;
-                font-size: 1.5rem;
-                font-weight: 600;
-                margin: 0;
-            }
-        }
-
-        .month-chips {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 auto 24px;
-            max-width: 900px;
-
-            .month-chip {
-                appearance: none;
-                border: 1px solid rgba($primary-color, 0.25);
-                background: #fff;
-                color: $third-color;
-                padding: 8px 12px;
-                border-radius: 999px;
-                font-size: 0.9rem;
-                cursor: pointer;
-                transition: all .2s ease;
-
-                &:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-                }
-
-                &.active {
-                    background: linear-gradient(135deg, $primary-color, $secondary-color);
-                    color: #fff;
-                    border-color: transparent;
-                    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-                }
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #777;
-            padding: 20px 0 0;
-        }
-
-        // Utiliser les mêmes styles que les cartes des spécialités
-        .specialty-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-            margin-top: 30px;
-            padding: 0 20px;
-
-            .card {
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                border: 2px solid transparent;
-                position: relative;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: -2px;
-                    left: -2px;
-                    right: -2px;
-                    bottom: -2px;
-                    border-radius: 22px;
-                    background: linear-gradient(135deg, $primary-color, $secondary-color, $third-color);
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                    pointer-events: none;
-                    z-index: -1;
-                }
-
-                &:hover {
-                    transform: translateY(-10px) scale(1.02);
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-
-                    &::before {
-                        opacity: 1;
-                    }
-                }
-
-                .card-image {
-                    position: relative;
-                    height: 250px;
-                    overflow: hidden;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        transition: all 0.5s ease;
-                        filter: brightness(0.9);
-                    }
-
-                    .card-overlay {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: linear-gradient(
-                            to bottom,
-                            transparent 0%,
-                            transparent 60%,
-                            rgba(0, 0, 0, 0.7) 100%
-                        );
-                        display: flex;
-                        align-items: flex-end;
-                        padding: 20px;
-                        opacity: 0;
-                        transition: all 0.3s ease;
-
-                        .location-badge {
-                            background: rgba(255, 255, 255, 0.95);
-                            color: $third-color;
-                            padding: 8px 16px;
-                            border-radius: 25px;
-                            font-size: 0.85rem;
-                            font-weight: 600;
-                            backdrop-filter: blur(10px);
-                            border: 1px solid rgba($primary-color, 0.3);
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                        }
-                    }
-
-                    &:hover {
-                        .card-overlay {
-                            opacity: 1;
-                        }
-
-                        img {
-                            transform: scale(1.1);
-                            filter: brightness(1.1);
-                        }
-                    }
-                }
-
-                .card-content {
-                    padding: 25px;
-                    background: white;
-
-                    h4 {
-                        font-size: 1.4rem;
-                        font-weight: 700;
-                        color: $third-color;
-                        margin-bottom: 12px;
-                        line-height: 1.3;
-                        letter-spacing: -0.5px;
-                    }
-
-                    p {
-                        color: #666;
-                        font-size: 0.95rem;
-                        line-height: 1.6;
-                        margin: 0;
-                        opacity: 0.9;
-                    }
-                }
-            }
-        }
-    }
-    
-    // Responsive Design
-    @media (max-width: 768px) {
-        .specialties-section {
-            padding: 60px 4% 50px;
-            
-            .specialties-header {
-                margin-bottom: 50px;
-                
-                h2 {
-                    font-size: 2.2rem;
-                    
-                    &::after {
-                        width: 80px;
-                        margin: 20px auto;
-                    }
-                }
-                
-                p {
-                    font-size: 1.1rem;
-                }
-            }
-            
-            .specialty-group {
-                margin-bottom: 50px;
-                
-                .specialty-title {
-                    font-size: 1.8rem;
-                    margin-bottom: 30px;
-                }
-                
-                .specialty-cards {
-                    grid-template-columns: 1fr;
-                    gap: 25px;
-                    margin-top: 30px;
-                    padding: 0 10px;
-                    
-                    .card {
-                        .card-image {
-                            height: 220px;
-                            
-                            .card-overlay {
-                                padding: 15px;
-                                
-                                .location-badge {
-                                    font-size: 0.8rem;
-                                    padding: 6px 12px;
-                                }
-                            }
-                        }
-                        
-                        .card-content {
-                            padding: 20px;
-                            
-                            h4 {
-                                font-size: 1.2rem;
-                            }
-                            
-                            p {
-                                font-size: 0.9rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        .quick-discovery {
-            padding: 60px 4% 40px;
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .travel-cards-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .specialties-section {
-            .specialties-header {
-                h2 {
-                    font-size: 1.8rem;
-                }
-                
-                p {
-                    font-size: 1rem;
-                }
-            }
-            
-            .specialty-group {
-                .specialty-title {
-                    font-size: 1.5rem;
-                }
-            }
-        }
-    }
+  }
 }
