@@ -25,9 +25,10 @@ interface WorldMapProps {
   showSearch?: boolean;
   height?: string;
   className?: string;
+  borderRadius?: string;
 }
 
-function WorldMap({ showSearch = true, height = "500px", className = "" }: WorldMapProps) {
+function WorldMap({ showSearch = true, height = "500px", className = "", borderRadius = "20px" }: WorldMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<Array<{ marker: L.CircleMarker; name: string }>>([]);
@@ -107,7 +108,7 @@ function WorldMap({ showSearch = true, height = "500px", className = "" }: World
       <div 
         ref={mapRef} 
         className="map-display"
-        style={{ height }}
+        style={{ height, borderRadius, overflow: "hidden" }}
       />
     </div>
   );
