@@ -5,3 +5,9 @@ $third-color: #8C6B4F;
 
 // Enveloppe Colors
 $enveloppe-light: #FBF0E1; 
+
+// CSS Custom Properties (globales)
+:root {
+	--header-height: 120px;
+	--header-gap: 12px; // espace entre le header et le 2e header/hero
+}

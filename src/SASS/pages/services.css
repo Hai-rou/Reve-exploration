@@ -1,4 +1,9 @@
 @charset "UTF-8";
+:root {
+  --header-height: 120px;
+  --header-gap: 12px;
+}
+
 .services .detail {
   display: flex;
   flex-direction: column;

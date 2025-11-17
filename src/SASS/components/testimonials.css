@@ -1,3 +1,8 @@
+:root {
+  --header-height: 120px;
+  --header-gap: 12px;
+}
+
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

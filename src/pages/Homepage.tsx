@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { travelCards, type TravelCard } from "../data/travelcard";
 import { getRegionKey, monthLabelsFr, seasonality } from "../data/seasonality";
 import "../SASS/pages/homepage.scss";
+import SignatureTrip from "../components/Items/SignatureTrip";
+import { signatureTripWestCoast } from "../data/trips";
 
 function Homepage() {
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1);
@@ -94,149 +96,7 @@ function Homepage() {
 
       {/* Voyage signature */}
       <section className="travel-together">
-        <div className="signature-card">
-          <div className="signature-media">
-            <img src="/image/sunset-7133867.jpg" alt="Voyage signature - Ouest Américain" loading="lazy" />
-            <div className="media-overlay">
-              <span className="badge">Voyage signature</span>
-              <h2>Ouest Américain – 12 jours</h2>
-              <p>De San Francisco à Los Angeles via les parcs mythiques</p>
-            </div>
-          </div>
-
-          <div className="signature-content">
-            <div className="facts">
-              <div className="fact"><span>⏱️</span>12 jours / 11 nuits</div>
-              <div className="fact"><span>🌤️</span>Meilleure période: Avril – Octobre</div>
-              <div className="fact"><span>💸</span>Budget: €€€ (moyen à confort)</div>
-              <div className="fact"><span>🚗</span>Style: Road‑trip en liberté</div>
-            </div>
-
-            <div className="highlights">
-              <span className="chip">San Francisco</span>
-              <span className="chip">Yosemite</span>
-              <span className="chip">Death Valley</span>
-              <span className="chip">Grand Canyon</span>
-              <span className="chip">Route 66</span>
-              <span className="chip">Las Vegas</span>
-              <span className="chip">Los Angeles</span>
-            </div>
-
-            <div className="itinerary">
-              <h3>Itinéraire suggéré</h3>
-              <ul className="roadmap" role="list">
-                <li className="stop left" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J1–J2 • San Francisco</strong>
-                    <span>Golden Gate, Alcatraz, Fisherman’s Wharf</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J1–J2">
-                    <h4>San Francisco – Mise en jambes</h4>
-                    <p>Balades à vélo sur le Golden Gate, visite d’Alcatraz et couchers de soleil sur les quais.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop right" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J3 • Yosemite</strong>
-                    <span>Vallée de Yosemite, El Capitan & Half Dome</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J3">
-                    <h4>Yosemite – Nature grandiose</h4>
-                    <p>Points de vue mythiques et randonnées faciles pour s’immerger dans la vallée.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop left" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J4 • Mammoth Lakes → Death Valley</strong>
-                    <span>Badwater Basin, Zabriskie Point au coucher du soleil</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J4">
-                    <h4>Death Valley – Déserts lunaires</h4>
-                    <p>Paysages surréalistes, points de vue flamboyants au coucher du soleil.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop right" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J5 • Las Vegas</strong>
-                    <span>Shows, néons et rooftops panoramiques</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J5">
-                    <h4>Las Vegas – Vibes & spectacles</h4>
-                    <p>Ambiance unique, lumières et spectacles. Idées rooftops selon vos envies.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop left" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J6–J7 • Grand Canyon</strong>
-                    <span>Rim Trail, lever de soleil sur Mather Point</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J6–J7">
-                    <h4>Grand Canyon – Moments suspendus</h4>
-                    <p>Levers/ouchers de soleil, points de vue et balades accessibles au bord du rim.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop right" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J8 • Route 66</strong>
-                    <span>Williams, Seligman & diners vintage</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J8">
-                    <h4>Route 66 – Americana</h4>
-                    <p>Arrêts vintage et diners typiques sur la plus iconique des routes.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop left" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J9–J10 • Los Angeles</strong>
-                    <span>Santa Monica, Venice, Hollywood & Griffith Observatory</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J9–J10">
-                    <h4>Los Angeles – Côte & cinéma</h4>
-                    <p>Plages iconiques, quartiers bohème et panoramas au Griffith Observatory.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-                <li className="stop right" tabIndex={0}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>J11–J12 • Plage & départ</strong>
-                    <span>Derniers instants au bord du Pacifique</span>
-                  </div>
-                  <div className="hover-modal" role="dialog" aria-modal="false" aria-label="Détails J11–J12">
-                    <h4>Relax & départ</h4>
-                    <p>Dernier bain de soleil, shopping souvenir et retour en douceur.</p>
-                    <button className="btn-primary">Voir le détail</button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="includes">
-              <h3>Ce qui est inclus</h3>
-              <ul className="include-list">
-                <li>Vols internationaux aller/retour</li>
-                <li>Location de voiture complète</li>
-                <li>Hébergements 3–4★ bien situés</li>
-                <li>Road‑book personnalisé et appli de voyage</li>
-              </ul>
-              <p className="note">Ce programme est 100% personnalisable selon vos envies (rythme, étapes, budget).</p>
-              <button className="btn-primary">Demander ce voyage</button>
-            </div>
-          </div>
-        </div>
+        <SignatureTrip data={signatureTripWestCoast} />
       </section>
       {/* Pourquoi nous choisir */}
       <section className="why-us">

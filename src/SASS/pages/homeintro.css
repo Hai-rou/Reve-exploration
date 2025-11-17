@@ -1,3 +1,8 @@
+:root {
+  --header-height: 120px;
+  --header-gap: 12px;
+}
+
 .home-intro {
   display: flex;
   flex-direction: column;
