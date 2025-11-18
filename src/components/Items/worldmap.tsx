@@ -9,16 +9,11 @@ const colors = {
   inspiration: "#D9B68C"  // $secondary-color
 } as const;
 
-// Marqueurs des destinations de voyage
+// Marqueurs limités aux 3 trips actifs
 const markersData = [
-  { coords: [9.75, -83.75] as [number, number], type: "speciality" as keyof typeof colors, name: "Costa Rica", description: "Spécialité : Nature et aventure" },
-  { coords: [-12.05, -77.05] as [number, number], type: "speciality" as keyof typeof colors, name: "Pérou", description: "Spécialité : Culture et histoire" },
   { coords: [39.5, -98.35] as [number, number], type: "speciality" as keyof typeof colors, name: "Ouest US", description: "Spécialité : Road trips" },
-  { coords: [42.0, 9.0] as [number, number], type: "speciality" as keyof typeof colors, name: "Corse", description: "Spécialité : Île de beauté" },
-  { coords: [52.0, -70.0] as [number, number], type: "speciality" as keyof typeof colors, name: "Québec", description: "Spécialité : Culture francophone" },
-  { coords: [48.85, 2.35] as [number, number], type: "organised" as keyof typeof colors, name: "France", description: "Voyages organisés" },
-  { coords: [40.71, -74] as [number, number], type: "inspiration" as keyof typeof colors, name: "New York", description: "Inspiration urbaine" },
-  { coords: [-33.86, 151.2] as [number, number], type: "inspiration" as keyof typeof colors, name: "Sydney", description: "Inspiration océanique" }
+  { coords: [26.8, 30.8] as [number, number], type: "speciality" as keyof typeof colors, name: "Égypte", description: "Spécialité : Nil & temples" },
+  { coords: [23.6, -102.6] as [number, number], type: "speciality" as keyof typeof colors, name: "Mexique", description: "Spécialité : Yucatán & plages" }
 ];
 
 interface WorldMapProps {

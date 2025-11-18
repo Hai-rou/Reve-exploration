@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --header-height: 120px;
   --header-gap: 12px;
@@ -18,6 +19,7 @@ header {
   border-bottom: 1px solid rgba(230, 209, 179, 0.2);
   border-radius: 30px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  animation: headerSlideDown 0.6s ease-out;
   min-height: 120px;
 }
 header.scrolled {
@@ -27,16 +29,16 @@ header.scrolled {
   border-bottom: 2px solid #E6D1B3;
 }
 header.scrolled h1 {
-  font-size: 1rem !important;
+  font-size: 0.7rem !important;
   transform: scale(0.9);
 }
 header.scrolled nav ul li a {
-  font-size: 1rem !important;
+  font-size: 0.7rem !important;
   padding: 8px 15px !important;
 }
 header h1 {
   margin: 0;
-  font-size: 2.8rem;
+  font-size: 1.8rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -71,6 +73,24 @@ header nav ul {
   gap: 10px;
   padding: 0;
   margin: 0;
+}
+header nav ul .login-button {
+  background: #E6D1B3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+header nav ul .login-button:hover {
+  background: #D9B68C;
+}
+header nav ul .login-button:focus-visible {
+  outline: 2px solid #D9B68C;
+  outline-offset: 2px;
 }
 header nav ul li {
   position: relative;
@@ -124,6 +144,13 @@ header nav ul li a.active::after {
   height: 6px;
   background: white;
   border-radius: 50%;
+}
+header nav ul li.user-email {
+  display: flex;
+  align-items: center;
+  color: #8C6B4F;
+  font-weight: 600;
+  padding: 0 6px;
 }
 header .menu-toggle {
   display: none;
@@ -193,6 +220,114 @@ header .menu-toggle.active span:nth-child(3) {
   }
 }
 
+/* Modal de connexion */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(1200px 600px at 50% 5%, rgba(0, 0, 0, 0.35), transparent 60%), rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  animation: modalFadeIn 0.22s ease-out both;
+}
+
+.modal {
+  position: relative;
+  width: min(420px, 92vw);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+  animation: modalZoomIn 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  /* scrollbars */
+  scrollbar-gutter: stable both-edges;
+}
+.modal::-webkit-scrollbar {
+  width: 10px;
+}
+.modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+.modal::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+}
+.modal-close:focus-visible {
+  outline: 2px solid #E6D1B3;
+  outline-offset: 2px;
+}
+
+.modal h2 {
+  margin: 0 0 12px;
+  text-align: center;
+  color: #8C6B4F;
+  padding-bottom: 20px;
+}
+
+.modal form {
+  display: grid;
+  gap: 10px;
+}
+
+.modal label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.modal .btn-primary {
+  margin-top: 6px;
+  background: #8C6B4F;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.modal-helper {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-error {
+  margin: 6px 0 0;
+  color: #b00020;
+  background: #fde7eb;
+  border: 1px solid #f5c2cb;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
 @keyframes headerSlideDown {
   from {
     transform: translateY(-100%);
@@ -203,6 +338,31 @@ header .menu-toggle.active span:nth-child(3) {
     opacity: 1;
   }
 }
-header {
-  animation: headerSlideDown 0.6s ease-out;
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes modalZoomIn {
+  from {
+    transform: translateY(-6px) scale(0.98);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  header, .modal-backdrop, .modal {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Empêche le scroll quand une modale est ouverte */
+body.no-scroll {
+  overflow: hidden;
 }/*# sourceMappingURL=header.css.map */

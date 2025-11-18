@@ -12,7 +12,7 @@
   --shadow-1: 0 6px 18px rgba(0,0,0,0.06);
   --shadow-2: 0 12px 30px rgba(0,0,0,0.12);
   --ring: 0 0 0 3px rgba(79, 70, 229, 0.14);
-  background: linear-gradient(135deg, white 0%, white 100%);
+  background: linear-gradient(135deg, rgb(227.295890411, 215.7232876712, 205.904109589) 20%, rgb(229.6666666667, 206.3333333333, 178.3333333333) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,9 +24,8 @@
   width: 100%;
   margin-left: -4%;
   margin-right: -4%;
-  text-align: left;
+  text-align: center;
   padding: 28px clamp(16px, 4vw, 40px) 20px;
-  border: solid 1px rgba(0, 0, 0, 0.05);
   /* Espace pour ne pas coller le header sticky */
   margin-top: var(--header-gap);
 }
@@ -35,18 +34,7 @@
   font-weight: 800;
   margin: 0 0 8px;
   position: relative;
-}
-.destination .dest-hero.scrolled {
-  flex-direction: column;
-  width: 10%;
-  top: 18%;
-  right: 90%;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(230, 209, 179, 0.35);
+  font-size: 4rem;
 }
 .destination .dest-hero p {
   color: #555;
@@ -66,173 +54,131 @@
   border-color: rgba(230, 209, 179, 0.5);
   box-shadow: var(--ring);
 }
-.destination .dest-hero .left-rail {
-  position: fixed;
-  left: clamp(8px, 2vw, 18px);
-  top: calc(var(--header-height) + var(--header-gap));
-  bottom: 20px;
-  width: 10px;
-  z-index: 1500;
-  pointer-events: none;
-  display: grid;
-  place-items: center;
-}
-.destination .dest-hero .left-rail .rail-track {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 6px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.35));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(230, 209, 179, 0.25);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12) inset;
-  /* End caps */
-}
-.destination .dest-hero .left-rail .rail-track::before, .destination .dest-hero .left-rail .rail-track::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(230, 209, 179, 0.35);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-}
-.destination .dest-hero .left-rail .rail-track::before {
-  top: -8px;
-}
-.destination .dest-hero .left-rail .rail-track::after {
-  bottom: -8px;
-}
-.destination .dest-hero .left-rail .rail-progress {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 100%;
-  transform-origin: bottom center;
-  transform: translateX(-50%) scaleY(0);
-  will-change: transform;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #E6D1B3, #D9B68C);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
-.destination .world {
+.destination .carrousel {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  padding: 40px 30px 60px;
-  background: #E6D1B3;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  max-width: 100%;
+  margin: 20px auto 10px;
 }
-.destination .world::before {
-  content: "";
+.destination .carrousel .carousel {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.destination .carrousel .carousel-viewport {
+  position: relative;
+  height: clamp(220px, 38vw, 480px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+.destination .carrousel .slide {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 25%, rgba(217, 182, 140, 0.18) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(230, 209, 179, 0.18) 0%, transparent 60%);
-  pointer-events: none;
-  opacity: 0.35;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  background: #000;
 }
-.destination .world .world-header {
-  text-align: left;
-  padding-left: clamp(16px, 4vw, 40px);
-  margin: 0 0 32px;
-  position: relative;
+.destination .carrousel .slide.active {
+  opacity: 1;
+  transform: scale(1);
 }
-.destination .world .world-header h1 {
-  font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin: 0 0 10px;
-  background: linear-gradient(90deg, #E6D1B3, #D9B68C);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-.destination .world .world-header p {
-  margin: 0;
-  color: #555;
-  font-size: 1.05rem;
-}
-.destination .world .map-wrapper {
-  position: relative;
+.destination .carrousel .slide img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: var(--radius-md);
-  border: 2px solid rgba(217, 182, 140, 0.4);
-  background: linear-gradient(135deg, #f9f9f9 0%, #ececec 100%);
-  overflow: hidden;
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  isolation: isolate;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(0.8);
 }
-.destination .world .map-wrapper .map-inner {
-  flex: 1;
-  position: relative;
-}
-.destination .world .map-wrapper::before {
-  content: "";
+.destination .carrousel .slide .slide-caption {
   position: absolute;
-  top: -40%;
-  left: -25%;
-  width: 70%;
-  height: 140%;
-  background: radial-gradient(circle at center, rgba(230, 209, 179, 0.15), transparent 70%);
-  animation: drift 22s linear infinite;
-  opacity: 0.35;
-}
-.destination .world .map-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: -35%;
-  right: -15%;
-  width: 60%;
-  height: 130%;
-  background: radial-gradient(circle at center, rgba(217, 182, 140, 0.14), transparent 72%);
-  animation: driftReverse 26s linear infinite;
-  opacity: 0.3;
-}
-.destination .world .map-toolbar {
-  margin: 24px 0 0;
+  inset: 0;
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(14px, 5vw, 28px);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.6) 100%);
 }
-.destination .world .map-toolbar button {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+.destination .carrousel .slide .slide-caption .badge {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.95);
+  color: #8C6B4F;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(230, 209, 179, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.destination .carrousel .slide .slide-caption h3 {
+  color: #fff;
+  margin: 0 0 6px;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  font-weight: 800;
+}
+.destination .carrousel .slide .slide-caption p {
+  color: #efefef;
+  margin: 0 0 10px;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+}
+.destination .carrousel .slide .slide-caption .btn-primary {
+  align-self: flex-start;
   padding: 10px 14px;
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.destination .world .map-toolbar button:hover {
+  border-radius: 10px;
   background: linear-gradient(135deg, #E6D1B3, #D9B68C);
   color: #fff;
-  box-shadow: 0 10px 22px -6px rgba(0, 0, 0, 0.25);
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
-.destination .world .map-toolbar button:focus-visible {
-  outline: none;
-  box-shadow: var(--ring);
+.destination .carrousel .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  font-size: 22px;
+  color: #8C6B4F;
 }
-.destination .filters {
+.destination .carrousel .nav.prev {
+  left: 12px;
+}
+.destination .carrousel .nav.next {
+  right: 12px;
+}
+.destination .carrousel .dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.destination .carrousel .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 107, 79, 0.4);
+  background: rgba(255, 255, 255, 0.9);
+}
+.destination .carrousel .dot.active {
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  border-color: transparent;
+}
+.destination .all-dest {
+  background-color: #8C6B4F;
+  border-radius: 20px;
+  width: 100%;
+}
+.destination .all-dest .filters {
   margin: 20px auto 10px;
   display: flex;
   gap: 10px;
@@ -240,7 +186,7 @@
   justify-content: center;
   max-width: 1100px;
 }
-.destination .filters .chip {
+.destination .all-dest .filters .chip {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -253,22 +199,22 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.destination .filters .chip:hover {
+.destination .all-dest .filters .chip:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
-.destination .filters .chip:focus-visible {
+.destination .all-dest .filters .chip:focus-visible {
   outline: none;
   box-shadow: var(--ring);
   border-color: rgba(230, 209, 179, 0.45);
 }
-.destination .filters .chip.active {
+.destination .all-dest .filters .chip.active {
   background: linear-gradient(135deg, #E6D1B3, #D9B68C);
   color: #fff;
   border-color: transparent;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
-.destination .dest-grid {
+.destination .all-dest .dest-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 22px;
@@ -276,13 +222,13 @@
   width: 100%;
   margin: 14px auto 26px;
 }
-.destination .dest-grid .empty {
+.destination .all-dest .dest-grid .empty {
   grid-column: 1/-1;
   text-align: center;
   color: #666;
   padding: 20px 0;
 }
-.destination .dest-grid .dest-card {
+.destination .all-dest .dest-grid .dest-card {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: var(--radius-md);
@@ -290,25 +236,25 @@
   box-shadow: var(--shadow-1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.destination .dest-grid .dest-card:hover {
+.destination .all-dest .dest-grid .dest-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-2);
 }
-.destination .dest-grid .dest-card:focus-within {
+.destination .all-dest .dest-grid .dest-card:focus-within {
   box-shadow: var(--shadow-2), var(--ring);
 }
-.destination .dest-grid .dest-card .media {
+.destination .all-dest .dest-grid .dest-card .media {
   position: relative;
   height: 200px;
 }
-.destination .dest-grid .dest-card .media img {
+.destination .all-dest .dest-grid .dest-card .media img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
 }
-.destination .dest-grid .dest-card .media .badge {
+.destination .all-dest .dest-grid .dest-card .media .badge {
   position: absolute;
   left: 12px;
   bottom: 12px;
@@ -319,15 +265,15 @@
   border: 1px solid rgba(230, 209, 179, 0.3);
   font-size: 0.85rem;
 }
-.destination .dest-grid .dest-card .body {
+.destination .all-dest .dest-grid .dest-card .body {
   padding: 14px 14px 16px;
 }
-.destination .dest-grid .dest-card .body h3 {
+.destination .all-dest .dest-grid .dest-card .body h3 {
   margin: 0 0 6px;
   color: #8C6B4F;
   font-size: 1.1rem;
 }
-.destination .dest-grid .dest-card .body p {
+.destination .all-dest .dest-grid .dest-card .body p {
   margin: 0;
   color: #555;
   font-size: 0.95rem;
@@ -360,54 +306,13 @@
   border: 0;
   cursor: pointer;
 }
-@media (max-width: 1020px) {
-  .destination .world {
-    padding: 34px 24px 50px;
-  }
-  .destination .world .world-header h1 {
-    font-size: 2.2rem;
-  }
-  .destination .world .map-wrapper {
-    aspect-ratio: 4/3;
-  }
-}
 @media (max-width: 640px) {
-  .destination .world {
-    padding: 28px 18px 46px;
-  }
-  .destination .world .world-header h1 {
-    font-size: 1.9rem;
-  }
-  .destination .world .map-wrapper {
-    aspect-ratio: 1/1;
-  }
   .destination .dest-hero .left-rail {
     display: none;
   }
 }
 
-@keyframes drift {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate(8%, 6%) rotate(12deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-}
-@keyframes driftReverse {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate(-6%, -5%) rotate(-10deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-}
+/* animations de carte supprimées */
 /* Modal de voyage (SignatureTrip) */
 .trip-modal-backdrop {
   position: fixed;

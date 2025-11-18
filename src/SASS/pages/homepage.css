@@ -73,6 +73,123 @@
   width: min(1100px, 92%);
   background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.12), transparent);
 }
+.homepage .carrousel {
+  padding: 18px 0 8px;
+}
+.homepage .carrousel .carousel {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.homepage .carrousel .carousel-viewport {
+  position: relative;
+  height: clamp(240px, 40vw, 520px);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+.homepage .carrousel .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  background: #000;
+}
+.homepage .carrousel .slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.homepage .carrousel .slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(0.8);
+}
+.homepage .carrousel .slide .slide-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(14px, 5vw, 28px);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.6) 100%);
+}
+.homepage .carrousel .slide .slide-caption .badge {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.95);
+  color: #8C6B4F;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(230, 209, 179, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.homepage .carrousel .slide .slide-caption h3 {
+  color: #fff;
+  margin: 0 0 6px;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+.homepage .carrousel .slide .slide-caption p {
+  color: #efefef;
+  margin: 0 0 10px;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+}
+.homepage .carrousel .slide .slide-caption .btn-primary {
+  align-self: flex-start;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+.homepage .carrousel .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  font-size: 22px;
+  color: #8C6B4F;
+}
+.homepage .carrousel .nav.prev {
+  left: 12px;
+}
+.homepage .carrousel .nav.next {
+  right: 12px;
+}
+.homepage .carrousel .dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+.homepage .carrousel .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 107, 79, 0.4);
+  background: rgba(255, 255, 255, 0.9);
+}
+.homepage .carrousel .dot.active {
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  border-color: transparent;
+}
 .homepage .when-to-go {
   padding: 80px 6% 60px;
   background: url("public/image/sunset-7133867.jpg") #fff;
