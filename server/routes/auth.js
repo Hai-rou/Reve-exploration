@@ -11,10 +11,11 @@ const signToken = (user) =>
   });
 
 const setAuthCookie = (res, token) => {
+  const prod = process.env.NODE_ENV === "production";
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false, // mettre true en prod derrière HTTPS
+    sameSite: prod ? "strict" : "lax",
+    secure: prod,
     maxAge: 7 * 24 * 3600 * 1000,
   });
 };
@@ -29,7 +30,7 @@ router.post("/register", async (req, res) => {
     const user = await User.create({ email, passwordHash });
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.json({ email: user.email });
+    res.json({ email: user.email, role: user.role });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Erreur serveur" });
@@ -45,7 +46,7 @@ router.post("/login", async (req, res) => {
     if (!ok) return res.status(401).json({ error: "Identifiants invalides" });
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.json({ email: user.email });
+    res.json({ email: user.email, role: user.role });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Erreur serveur" });
@@ -57,12 +58,14 @@ router.post("/logout", (req, res) => {
   res.json({ ok: true });
 });
 
-router.get("/me", (req, res) => {
+router.get("/me", async (req, res) => {
   const token = req.cookies?.token;
   if (!token) return res.status(401).json({ error: "Non connecté" });
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET || "dev_secret");
-    res.json({ email: payload.email });
+    const user = await User.findById(payload.sub).lean();
+    if (!user) return res.status(401).json({ error: "Session invalide" });
+    res.json({ email: user.email, role: user.role });
   } catch (e) {
     res.status(401).json({ error: "Session invalide" });
   }

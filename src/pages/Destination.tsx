@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 
 import SignatureTrip from "../components/Items/SignatureTrip";
@@ -13,6 +13,7 @@ function Destination() {
     const [search, setSearch] = useState("");
     const [region, setRegion] = useState<string>("Tous");
     const [openTrip, setOpenTrip] = useState<Trip | null>(null);
+    const [apiTrips, setApiTrips] = useState<Trip[] | null>(null);
 
     const regions = ["Tous", "USA", "Égypte", "Mexique"];
 
@@ -25,6 +26,23 @@ function Destination() {
         });
     }, [search, region]);
 
+    useEffect(() => {
+        fetch("/api/trips")
+          .then(r => r.ok ? r.json() : null)
+          .then(d => setApiTrips(d))
+          .catch(() => setApiTrips(null));
+    }, []);
+
+    function getTripForLocationApiAware(location: string): Trip {
+        const loc = location.toLowerCase();
+        const fromApi = (name: string) => apiTrips?.find(t => t.title.toLowerCase().includes(name)) as Trip | undefined;
+        if (loc.includes("égypte")) return fromApi("égypte") || tripEgyptNile;
+        if (loc.includes("mexique")) return fromApi("mexique") || tripMexicoYucatan;
+        if (loc.includes("usa") || loc.includes("états-unis") || loc.includes("utah") || loc.includes("nevada") || loc.includes("californie") || loc.includes("new york") || loc.includes("floride")) {
+            return fromApi("usa") || signatureTripWestCoast;
+        }
+        return signatureTripWestCoast;
+    }
     
 
     return (
@@ -104,11 +122,11 @@ function Destination() {
                                 data-location={card.location}
                                 role="button"
                                 tabIndex={0}
-                                onClick={() => setOpenTrip(getTripForLocation(card.location))}
+                                onClick={() => setOpenTrip(getTripForLocationApiAware(card.location))}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter" || e.key === " ") {
                                         e.preventDefault();
-                                        setOpenTrip(getTripForLocation(card.location));
+                                        setOpenTrip(getTripForLocationApiAware(card.location));
                                     }
                                 }}
                             >
@@ -157,17 +175,6 @@ function Destination() {
             </section>
         </div>
     );
-}
-
-function getTripForLocation(location: string): Trip {
-    const loc = location.toLowerCase();
-    if (loc.includes("égypte") || loc.includes("edfou")) return tripEgyptNile;
-    if (loc.includes("mexique")) return tripMexicoYucatan;
-    if (loc.includes("usa") || loc.includes("états-unis") || loc.includes("utah") || loc.includes("nevada") || loc.includes("californie") || loc.includes("new york") || loc.includes("floride")) {
-        return signatureTripWestCoast;
-    }
-    // Fallback
-    return signatureTripWestCoast;
 }
 
 export default Destination;

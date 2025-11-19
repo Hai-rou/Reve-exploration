@@ -30,6 +30,7 @@ header.scrolled {
 }
 header.scrolled h1 {
   font-size: 0.7rem !important;
+  text-align: center;
   transform: scale(0.9);
 }
 header.scrolled nav ul li a {
@@ -38,8 +39,9 @@ header.scrolled nav ul li a {
 }
 header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 800;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
   background: linear-gradient(135deg, #E6D1B3 0%, #8C6B4F 50%, #D9B68C 100%);
@@ -99,7 +101,7 @@ header nav ul li a {
   display: block;
   color: #8C6B4F;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 0.7rem;
   font-weight: 600;
   padding: 12px 20px;
   border-radius: 25px;
@@ -151,6 +153,7 @@ header nav ul li.user-email {
   color: #8C6B4F;
   font-weight: 600;
   padding: 0 6px;
+  font-size: 0.7rem;
 }
 header .menu-toggle {
   display: none;

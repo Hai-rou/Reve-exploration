@@ -1,12 +1,21 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { travelCards, type TravelCard } from "../data/travelcard";
 import { getRegionKey, monthLabelsFr, seasonality } from "../data/seasonality";
 import "../SASS/pages/homepage.scss";
 import SignatureTrip from "../components/Items/SignatureTrip";
 import { signatureTripWestCoast } from "../data/trips";
+import type { Trip } from "../types/trip";
 
 function Homepage() {
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1);
+  const [apiTrips, setApiTrips] = useState<Trip[] | null>(null);
+
+  useEffect(() => {
+    fetch("/api/trips")
+      .then(r => r.ok ? r.json() : null)
+      .then(d => setApiTrips(d))
+      .catch(() => setApiTrips(null));
+  }, []);
   // (Section spécialités retirée pour le moment)
 
   // Cartes idéales pour le mois sélectionné
@@ -96,7 +105,7 @@ function Homepage() {
 
       {/* Voyage signature */}
       <section className="travel-together">
-        <SignatureTrip data={signatureTripWestCoast} />
+        <SignatureTrip data={(apiTrips?.find(t => t.title.toLowerCase().includes("usa")) as Trip) || signatureTripWestCoast} />
       </section>
       {/* Pourquoi nous choisir */}
       <section className="why-us">

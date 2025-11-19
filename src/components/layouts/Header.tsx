@@ -9,7 +9,8 @@ function Header() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [me, setMe] = useState<string | null>(null);
+  type Me = { email: string; role?: string } | null;
+  const [me, setMe] = useState<Me>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
 
   const handleLogin = () => setIsLoginOpen(true);
@@ -34,7 +35,7 @@ function Header() {
   useEffect(() => {
     fetch("/api/auth/me", { credentials: "include" })
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => setMe(d?.email ?? null))
+      .then((d) => d && setMe({ email: d.email, role: d.role }))
       .catch(() => {});
   }, []);
 
@@ -54,7 +55,17 @@ function Header() {
         throw new Error(j.error || "Échec de connexion");
       }
       const data = await res.json();
-      setMe(data.email);
+      setMe({ email: data.email, role: data.role });
+      // Assure d'avoir le rôle (selon ancienne version d'API côté cache)
+      if (!data.role) {
+        try {
+          const meRes = await fetch("/api/auth/me", { credentials: "include" });
+          if (meRes.ok) {
+            const meJson = await meRes.json();
+            setMe({ email: meJson.email, role: meJson.role });
+          }
+        } catch {}
+      }
       setPassword("");
       closeLogin();
     } catch (err: any) {
@@ -79,13 +90,17 @@ function Header() {
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/about">À Propos</Link></li>
           <li><Link to="/contact">Contact</Link></li>
+          
           {me ? (
             <>
-              <li className="user-email">{me}</li>
-              <button className="login-button" onClick={onLogout}>Se Déconnecter</button>
+              {me.role?.toLowerCase() === "admin" && (
+                <li><Link to="/admin">Admin</Link></li>
+              )}
+              <li className="user-email">{me.email}</li>
+              <li><button className="login-button" onClick={onLogout}>Se Déconnecter</button></li>
             </>
           ) : (
-            <button className="login-button" onClick={handleLogin}>Se Connecter</button>
+            <li><button className="login-button" onClick={handleLogin}>Se Connecter</button></li>
           )}
         </ul>
       </nav>

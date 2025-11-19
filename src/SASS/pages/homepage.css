@@ -192,7 +192,7 @@
 }
 .homepage .when-to-go {
   padding: 80px 6% 60px;
-  background: url("public/image/sunset-7133867.jpg") #fff;
+  background: url("/image/sunset-7133867.jpg") #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
