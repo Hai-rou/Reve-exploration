@@ -2,6 +2,7 @@ import "../../SASS/layouts/header.scss"
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
+import { apiFetch } from "../../lib/api";
 
 function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -33,7 +34,7 @@ function Header() {
 
   // Récupère la session si un cookie existe
   useEffect(() => {
-    fetch("/api/auth/me", { credentials: "include" })
+    apiFetch("/api/auth/me")
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => d && setMe({ email: d.email, role: d.role }))
       .catch(() => {});
@@ -44,11 +45,9 @@ function Header() {
     setSubmitting(true);
     setErrorMsg(null);
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await apiFetch("/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
       if (!res.ok) {
         const j = await res.json().catch(() => ({} as any));
@@ -76,7 +75,7 @@ function Header() {
   }
 
   async function onLogout() {
-    await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+    await apiFetch("/api/auth/logout", { method: "POST" });
     setMe(null);
   }
 

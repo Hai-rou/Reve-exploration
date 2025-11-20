@@ -12,10 +12,11 @@ const signToken = (user) =>
 
 const setAuthCookie = (res, token) => {
   const prod = process.env.NODE_ENV === "production";
+  const cross = process.env.CROSS_SITE === "1"; // si front et API domaines différents
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: prod ? "strict" : "lax",
-    secure: prod,
+    sameSite: cross ? "none" : prod ? "strict" : "lax",
+    secure: cross ? true : prod,
     maxAge: 7 * 24 * 3600 * 1000,
   });
 };
@@ -54,7 +55,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token", { httpOnly: true, sameSite: "lax", secure: false });
+  const prod = process.env.NODE_ENV === "production";
+  const cross = process.env.CROSS_SITE === "1";
+  res.clearCookie("token", { httpOnly: true, sameSite: cross ? "none" : prod ? "strict" : "lax", secure: cross ? true : prod });
   res.json({ ok: true });
 });
 
