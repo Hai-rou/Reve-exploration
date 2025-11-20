@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import SignatureTrip from "../components/Items/SignatureTrip";
 import type { Trip } from "../types/trip";
 import { signatureTripWestCoast, tripEgyptNile, tripMexicoYucatan } from "../data/trips";
+import { fetchTripsSupabase } from "../lib/supabaseTrips";
 import { travelCards, type TravelCard } from "../data/travelcard";
 import "../SASS/pages/destination.scss";
 import Carousel from "../components/Items/Carousel";
@@ -27,10 +28,14 @@ function Destination() {
     }, [search, region]);
 
     useEffect(() => {
-        fetch("/api/trips")
-          .then(r => r.ok ? r.json() : null)
-          .then(d => setApiTrips(d))
-          .catch(() => setApiTrips(null));
+        (async () => {
+            const supa = await fetchTripsSupabase();
+            if (supa && supa.length) { setApiTrips(supa); return; }
+            fetch("/api/trips")
+              .then(r => r.ok ? r.json() : null)
+              .then(d => setApiTrips(d))
+              .catch(() => setApiTrips(null));
+        })();
     }, []);
 
     function getTripForLocationApiAware(location: string): Trip {

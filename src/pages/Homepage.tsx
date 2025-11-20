@@ -4,6 +4,7 @@ import { getRegionKey, monthLabelsFr, seasonality } from "../data/seasonality";
 import "../SASS/pages/homepage.scss";
 import SignatureTrip from "../components/Items/SignatureTrip";
 import { signatureTripWestCoast } from "../data/trips";
+import { fetchTripsSupabase } from "../lib/supabaseTrips";
 import type { Trip } from "../types/trip";
 
 function Homepage() {
@@ -11,10 +12,16 @@ function Homepage() {
   const [apiTrips, setApiTrips] = useState<Trip[] | null>(null);
 
   useEffect(() => {
-    fetch("/api/trips")
-      .then(r => r.ok ? r.json() : null)
-      .then(d => setApiTrips(d))
-      .catch(() => setApiTrips(null));
+    (async () => {
+      // Essai Supabase d'abord
+      const supa = await fetchTripsSupabase();
+      if (supa && supa.length) { setApiTrips(supa); return; }
+      // Fallback API Express (si encore déployée) sinon reste sur données locales
+      fetch("/api/trips")
+        .then(r => r.ok ? r.json() : null)
+        .then(d => setApiTrips(d))
+        .catch(() => setApiTrips(null));
+    })();
   }, []);
   // (Section spécialités retirée pour le moment)
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { apiFetch } from "../../lib/api";
+import { supabase, supabaseLogin, supabaseLogout, getCurrentUserWithRole } from "../../lib/supabase";
 
 function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -32,12 +33,21 @@ function Header() {
     return () => body.classList.remove("no-scroll");
   }, [isLoginOpen]);
 
-  // Récupère la session si un cookie existe
+  // Récupère la session initiale (Supabase prioritaire si configuré)
   useEffect(() => {
-    apiFetch("/api/auth/me")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => d && setMe({ email: d.email, role: d.role }))
-      .catch(() => {});
+    (async () => {
+      if (supabase) {
+        try {
+          const info = await getCurrentUserWithRole();
+          if (info) { setMe(info); return; }
+        } catch {}
+      }
+      // Fallback backend Express
+      apiFetch("/api/auth/me")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => d && setMe({ email: d.email, role: d.role }))
+        .catch(() => {});
+    })();
   }, []);
 
   async function onSubmit(e: React.FormEvent) {
@@ -45,25 +55,31 @@ function Header() {
     setSubmitting(true);
     setErrorMsg(null);
     try {
-      const res = await apiFetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password })
-      });
-      if (!res.ok) {
-        const j = await res.json().catch(() => ({} as any));
-        throw new Error(j.error || "Échec de connexion");
-      }
-      const data = await res.json();
-      setMe({ email: data.email, role: data.role });
-      // Assure d'avoir le rôle (selon ancienne version d'API côté cache)
-      if (!data.role) {
-        try {
-          const meRes = await fetch("/api/auth/me", { credentials: "include" });
-          if (meRes.ok) {
-            const meJson = await meRes.json();
-            setMe({ email: meJson.email, role: meJson.role });
-          }
-        } catch {}
+      if (supabase) {
+        await supabaseLogin(email, password);
+        const info = await getCurrentUserWithRole();
+        if (!info) throw new Error("Utilisateur non trouvé après connexion");
+        setMe(info);
+      } else {
+        const res = await apiFetch("/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password })
+        });
+        if (!res.ok) {
+          const j = await res.json().catch(() => ({} as any));
+          throw new Error(j.error || "Échec de connexion");
+        }
+        const data = await res.json();
+        setMe({ email: data.email, role: data.role });
+        if (!data.role) {
+          try {
+            const meRes = await fetch("/api/auth/me", { credentials: "include" });
+            if (meRes.ok) {
+              const meJson = await meRes.json();
+              setMe({ email: meJson.email, role: meJson.role });
+            }
+          } catch {}
+        }
       }
       setPassword("");
       closeLogin();
@@ -75,7 +91,11 @@ function Header() {
   }
 
   async function onLogout() {
-    await apiFetch("/api/auth/logout", { method: "POST" });
+    if (supabase) {
+      await supabaseLogout();
+    } else {
+      await apiFetch("/api/auth/logout", { method: "POST" });
+    }
     setMe(null);
   }
 
