@@ -2,7 +2,6 @@ import "../../SASS/layouts/header.scss"
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
-import { apiFetch } from "../../lib/api";
 import { supabase, supabaseLogin, supabaseLogout, getCurrentUserWithRole } from "../../lib/supabase";
 
 function Header() {
@@ -33,7 +32,7 @@ function Header() {
     return () => body.classList.remove("no-scroll");
   }, [isLoginOpen]);
 
-  // Récupère la session initiale (Supabase prioritaire si configuré)
+  // Récupère la session initiale (Supabase uniquement désormais)
   useEffect(() => {
     (async () => {
       if (supabase) {
@@ -41,12 +40,11 @@ function Header() {
           const info = await getCurrentUserWithRole();
           if (info) { setMe(info); }
         } catch {}
-        return; // Pas de fallback API si Supabase est configuré
+        return;
+      } else {
+        // Plus de backend legacy: on avertit pour config manquante
+        console.warn("Supabase non configuré: ajoute VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans les variables Vercel.");
       }
-      apiFetch("/api/auth/me")
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => d && setMe({ email: d.email, role: d.role }))
-        .catch(() => {});
     })();
   }, []);
 
@@ -61,25 +59,7 @@ function Header() {
         if (!info) throw new Error("Utilisateur non trouvé après connexion");
         setMe(info);
       } else {
-        const res = await apiFetch("/api/auth/login", {
-          method: "POST",
-          body: JSON.stringify({ email, password })
-        });
-        if (!res.ok) {
-          const j = await res.json().catch(() => ({} as any));
-          throw new Error(j.error || "Échec de connexion");
-        }
-        const data = await res.json();
-        setMe({ email: data.email, role: data.role });
-        if (!data.role) {
-          try {
-            const meRes = await fetch("/api/auth/me", { credentials: "include" });
-            if (meRes.ok) {
-              const meJson = await meRes.json();
-              setMe({ email: meJson.email, role: meJson.role });
-            }
-          } catch {}
-        }
+        throw new Error("Supabase non configuré: définir VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY sur Vercel");
       }
       setPassword("");
       closeLogin();
@@ -91,11 +71,8 @@ function Header() {
   }
 
   async function onLogout() {
-    if (supabase) {
-      await supabaseLogout();
-    } else {
-      await apiFetch("/api/auth/logout", { method: "POST" });
-    }
+    if (supabase) await supabaseLogout();
+    else console.warn("Logout: Supabase non configuré");
     setMe(null);
   }
 
