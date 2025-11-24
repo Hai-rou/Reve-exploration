@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "../SASS/pages/admin.scss";
 import { supabase, getCurrentUserWithRole } from "../lib/supabase";
-import { listTripsAdmin, updateTripAdmin, deleteTripAdmin, createTripAdmin, TripRow } from "../lib/supabaseTripsAdmin";
+import type { TripRow } from "../lib/supabaseTripsAdmin";
+import { listTripsAdmin, createTripAdmin, updateTripAdmin, deleteTripAdmin } from "../lib/supabaseTripsAdmin";
 
 export default function Admin() {
   const [rows, setRows] = useState<TripRow[]>([]);
