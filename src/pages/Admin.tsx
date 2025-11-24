@@ -3,6 +3,7 @@ import "../SASS/pages/admin.scss";
 import { supabase, getCurrentUserWithRole } from "../lib/supabase";
 import type { TripRow } from "../lib/supabaseTripsAdmin";
 import { listTripsAdmin, createTripAdmin, updateTripAdmin, deleteTripAdmin } from "../lib/supabaseTripsAdmin";
+import { uploadMedia } from "../lib/supabaseStorage";
 
 export default function Admin() {
   const [rows, setRows] = useState<TripRow[]>([]);
@@ -11,6 +12,7 @@ export default function Admin() {
   const [err, setErr] = useState<string | null>(null);
   const [role, setRole] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -57,6 +59,19 @@ export default function Admin() {
     } catch (e: any) { setErr(e.message); }
   }
 
+  async function handleFileUpload(file: File) {
+    setUploading(true);
+    setErr(null);
+    try {
+      const url = await uploadMedia(file, 'trips');
+      setNewTrip(t => ({ ...t, media_url: url }));
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setUploading(false);
+    }
+  }
+
   if (!supabase) return <div>Supabase non configuré.</div>;
   if (loading) return <div>Chargement...</div>;
   if (role?.toLowerCase() !== 'admin') return <div>Accès refusé (admin requis).</div>;
@@ -71,7 +86,12 @@ export default function Admin() {
           <input placeholder="Titre" value={newTrip.title || ''} onChange={e => setNewTrip(t => ({ ...t, title: e.target.value }))} />
           <input placeholder="Sous-titre" value={newTrip.subtitle || ''} onChange={e => setNewTrip(t => ({ ...t, subtitle: e.target.value }))} />
           <input placeholder="URL media" value={newTrip.media_url || ''} onChange={e => setNewTrip(t => ({ ...t, media_url: e.target.value }))} />
-          <button onClick={create}>Ajouter</button>
+          <label className="file-upload">
+            📤 Upload
+            <input type="file" accept="image/*" onChange={e => e.target.files && handleFileUpload(e.target.files[0])} style={{ display: 'none' }} />
+          </label>
+          {uploading && <span>Upload...</span>}
+          <button onClick={create} disabled={uploading}>Ajouter</button>
         </div>
       </section>
       <section>
