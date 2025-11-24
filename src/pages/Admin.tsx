@@ -24,11 +24,11 @@ export default function Admin() {
     })();
   }, []);
 
-  function onEdit(id: string, patch: Partial<TripRow>) {
+  function onEdit(id: number, patch: Partial<TripRow>) {
     setDrafts((d) => ({ ...d, [id]: { ...(d[id] || rows.find(r => r.id === id) || {}), ...patch } }));
   }
 
-  async function save(id: string) {
+  async function save(id: number) {
     setErr(null);
     try {
       const patch = drafts[id];
@@ -41,7 +41,7 @@ export default function Admin() {
     }
   }
 
-  async function remove(id: string) {
+  async function remove(id: number) {
     if (!confirm("Supprimer ce trip ?")) return;
     try {
       await deleteTripAdmin(id);
