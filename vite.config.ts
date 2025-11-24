@@ -13,12 +13,14 @@ export default defineConfig({
     }
   },
   server: {
-    proxy: {
+    // Proxy désactivé car on utilise désormais Supabase directement.
+    // Réactiver si un backend Express tourne en local.
+    proxy: process.env.USE_LOCAL_API === '1' ? {
       '/api': {
         target: 'http://localhost:4000',
         changeOrigin: true,
       }
-    }
+    } : undefined
   },
   build: {
     target: 'es2015',

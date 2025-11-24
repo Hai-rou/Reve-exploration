@@ -39,10 +39,10 @@ function Header() {
       if (supabase) {
         try {
           const info = await getCurrentUserWithRole();
-          if (info) { setMe(info); return; }
+          if (info) { setMe(info); }
         } catch {}
+        return; // Pas de fallback API si Supabase est configuré
       }
-      // Fallback backend Express
       apiFetch("/api/auth/me")
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => d && setMe({ email: d.email, role: d.role }))

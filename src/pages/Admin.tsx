@@ -1,119 +1,94 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import "../SASS/pages/admin.scss";
-
-type TripDoc = {
-  _id: string;
-  mediaUrl: string;
-  mediaAlt?: string;
-  title: string;
-  subtitle?: string;
-};
-
-type MediaFile = { name: string; url: string };
+import { supabase, getCurrentUserWithRole } from "../lib/supabase";
+import { listTripsAdmin, updateTripAdmin, deleteTripAdmin, createTripAdmin, TripRow } from "../lib/supabaseTripsAdmin";
 
 export default function Admin() {
-  const [trips, setTrips] = useState<TripDoc[]>([]);
-  const [editing, setEditing] = useState<Record<string, TripDoc>>({});
-  const [media, setMedia] = useState<MediaFile[]>([]);
-  const [uploading, setUploading] = useState(false);
+  const [rows, setRows] = useState<TripRow[]>([]);
+  const [drafts, setDrafts] = useState<Record<string, Partial<TripRow>>>({});
+  const [newTrip, setNewTrip] = useState<Partial<TripRow>>({ title: "", subtitle: "", media_url: "" });
   const [err, setErr] = useState<string | null>(null);
-
-  async function loadTrips() {
-    const r = await fetch("/api/trips", { credentials: "include" });
-    if (!r.ok) return;
-    const j = await r.json();
-    setTrips(j);
-  }
-  async function loadMedia() {
-    const r = await fetch("/api/media", { credentials: "include" });
-    if (!r.ok) return;
-    const j = await r.json();
-    setMedia(j);
-  }
+  const [role, setRole] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadTrips();
-    loadMedia();
+    (async () => {
+      const me = await getCurrentUserWithRole();
+      setRole(me?.role);
+      const data = await listTripsAdmin();
+      setRows(data);
+      setLoading(false);
+    })();
   }, []);
 
-  function onEdit(id: string, patch: Partial<TripDoc>) {
-    setEditing((s) => ({ ...s, [id]: { ...(s[id] || trips.find(t => t._id === id)!), ...patch } }));
+  function onEdit(id: string, patch: Partial<TripRow>) {
+    setDrafts((d) => ({ ...d, [id]: { ...(d[id] || rows.find(r => r.id === id) || {}), ...patch } }));
   }
 
-  async function saveTrip(id: string) {
+  async function save(id: string) {
     setErr(null);
-    const body = editing[id];
-    if (!body) return;
-    const r = await fetch(`/api/trips/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(body),
-    });
-    if (!r.ok) {
-      const j = await r.json().catch(() => ({}));
-      setErr(j.error || "Échec mise à jour");
-      return;
-    }
-    setEditing((s) => { const n = { ...s }; delete n[id]; return n; });
-    loadTrips();
-  }
-
-  async function deleteTrip(id: string) {
-    if (!confirm("Supprimer ce trip ?")) return;
-    await fetch(`/api/trips/${id}`, { method: "DELETE", credentials: "include" });
-    loadTrips();
-  }
-
-  async function uploadFile(file: File) {
-    setUploading(true); setErr(null);
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const r = await fetch("/api/media/upload", { method: "POST", credentials: "include", body: fd });
-      if (!r.ok) throw new Error("Upload échoué");
-      await loadMedia();
+      const patch = drafts[id];
+      if (!patch) return;
+      await updateTripAdmin(id, patch);
+      setDrafts((d) => { const n = { ...d }; delete n[id]; return n; });
+      setRows(await listTripsAdmin());
     } catch (e: any) {
       setErr(e.message);
-    } finally { setUploading(false); }
+    }
   }
 
-  const rows = useMemo(() => trips.map((t) => editing[t._id] || t), [trips, editing]);
+  async function remove(id: string) {
+    if (!confirm("Supprimer ce trip ?")) return;
+    try {
+      await deleteTripAdmin(id);
+      setRows(await listTripsAdmin());
+    } catch (e: any) { setErr(e.message); }
+  }
+
+  async function create() {
+    setErr(null);
+    try {
+      if (!newTrip.title) throw new Error("Titre requis");
+      await createTripAdmin(newTrip);
+      setNewTrip({ title: "", subtitle: "", media_url: "" });
+      setRows(await listTripsAdmin());
+    } catch (e: any) { setErr(e.message); }
+  }
+
+  if (!supabase) return <div>Supabase non configuré.</div>;
+  if (loading) return <div>Chargement...</div>;
+  if (role?.toLowerCase() !== 'admin') return <div>Accès refusé (admin requis).</div>;
 
   return (
     <div className="admin">
-      <h1>Admin</h1>
+      <h1>Admin Trips</h1>
       {err && <div className="form-error" role="alert">{err}</div>}
-
       <section>
-        <h2>Images</h2>
-        <div className="upload">
-          <input type="file" accept="image/*" onChange={(e) => e.target.files && uploadFile(e.target.files[0])} />
-          {uploading && <span>Envoi...</span>}
-        </div>
-        <div className="media-grid">
-          {media.map((m) => (
-            <figure key={m.name}>
-              <img src={m.url} alt={m.name} />
-              <figcaption>{m.name}</figcaption>
-            </figure>
-          ))}
+        <h2>Créer</h2>
+        <div className="trip-row new">
+          <input placeholder="Titre" value={newTrip.title || ''} onChange={e => setNewTrip(t => ({ ...t, title: e.target.value }))} />
+          <input placeholder="Sous-titre" value={newTrip.subtitle || ''} onChange={e => setNewTrip(t => ({ ...t, subtitle: e.target.value }))} />
+          <input placeholder="URL media" value={newTrip.media_url || ''} onChange={e => setNewTrip(t => ({ ...t, media_url: e.target.value }))} />
+          <button onClick={create}>Ajouter</button>
         </div>
       </section>
-
       <section>
-        <h2>Trips</h2>
+        <h2>Liste</h2>
         <div className="trips">
-          {rows.map((t) => (
-            <div key={t._id} className="trip-row">
-              <input value={t.title} onChange={(e) => onEdit(t._id, { title: e.target.value })} />
-              <input value={t.subtitle || ""} onChange={(e) => onEdit(t._id, { subtitle: e.target.value })} />
-              <input value={t.mediaUrl} onChange={(e) => onEdit(t._id, { mediaUrl: e.target.value })} />
-              <button onClick={() => saveTrip(t._id)}>Sauver</button>
-              <button className="danger" onClick={() => deleteTrip(t._id)}>Supprimer</button>
-            </div>
-          ))}
-          {rows.length === 0 && <div>Aucun trip encore en base.</div>}
+          {rows.map(r => {
+            const draft = drafts[r.id] || r;
+            return (
+              <div key={r.id} className="trip-row">
+                <input value={draft.title || ''} onChange={e => onEdit(r.id, { title: e.target.value })} />
+                <input value={draft.subtitle || ''} onChange={e => onEdit(r.id, { subtitle: e.target.value })} />
+                <input value={draft.media_url || ''} onChange={e => onEdit(r.id, { media_url: e.target.value })} />
+                <button onClick={() => save(r.id)} disabled={!drafts[r.id]}>Sauver</button>
+                <button className="danger" onClick={() => remove(r.id)}>Supprimer</button>
+              </div>
+            );
+          })}
+          {rows.length === 0 && <div>Aucun trip.</div>}
         </div>
       </section>
     </div>

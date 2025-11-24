@@ -30,11 +30,13 @@ function Destination() {
     useEffect(() => {
         (async () => {
             const supa = await fetchTripsSupabase();
-            if (supa && supa.length) { setApiTrips(supa); return; }
-            fetch("/api/trips")
-              .then(r => r.ok ? r.json() : null)
-              .then(d => setApiTrips(d))
-              .catch(() => setApiTrips(null));
+            if (supa) { setApiTrips(supa); return; }
+            if (import.meta.env.VITE_USE_LOCAL_API === '1') {
+              fetch('/api/trips')
+                .then(r => r.ok ? r.json() : null)
+                .then(d => setApiTrips(d))
+                .catch(() => setApiTrips(null));
+            }
         })();
     }, []);
 
