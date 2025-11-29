@@ -83,6 +83,7 @@ function Header() {
         <ul>
           <li><Link to="/">Accueil</Link></li>
           <li><Link to="/destinations">Destinations</Link></li>
+          <li><Link to="/infrance">Voyages en France</Link></li>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/about">À Propos</Link></li>
           <li><Link to="/contact">Contact</Link></li>

@@ -183,7 +183,7 @@ function Homepage() {
         <div className="faq-list">
           <details>
             <summary>Comment se passe la personnalisation du voyage ?</summary>
-            <p>Un conseiller échange avec vous (visio/téléphone) et construit un itinéraire sur‑mesure.</p>
+            <p>Un conseiller échange avec vous (visio/téléphone) puis fixe un rendez‑vous à domicile.</p>
           </details>
           <details>
             <summary>Proposez‑vous une assistance 24/7 ?</summary>
