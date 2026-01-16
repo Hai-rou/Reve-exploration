@@ -393,20 +393,21 @@
   scrollbar-width: thin;
 }
 
-/* SignatureTrip styling inside modal: reuse travel-together look */
-.trip-modal .signature-card {
+/* SignatureTrip styling - shared between modal and direct use */
+.signature-card {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
-.trip-modal .signature-media {
+
+.signature-media {
   position: relative;
   height: 280px;
   overflow: hidden;
 }
-.trip-modal .signature-media img {
+.signature-media img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -414,7 +415,7 @@
   filter: brightness(0.9);
   transform: scale(1.02);
 }
-.trip-modal .signature-media .media-overlay {
+.signature-media .media-overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -424,7 +425,7 @@
   padding: 22px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.5) 100%);
 }
-.trip-modal .signature-media .media-overlay .badge {
+.signature-media .media-overlay .badge {
   align-self: flex-start;
   background: rgba(255, 255, 255, 0.95);
   color: #8C6B4F;
@@ -436,27 +437,28 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.trip-modal .signature-media .media-overlay h2 {
+.signature-media .media-overlay h2 {
   color: #fff;
   margin: 0;
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
 }
-.trip-modal .signature-media .media-overlay p {
+.signature-media .media-overlay p {
   color: #f2f2f2;
   margin: 0;
 }
-.trip-modal .signature-content {
+
+.signature-content {
   padding: 22px;
 }
-.trip-modal .signature-content .facts {
+.signature-content .facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
   margin-bottom: 14px;
 }
-.trip-modal .signature-content .facts .fact {
+.signature-content .facts .fact {
   background: #fafafa;
   border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 12px;
@@ -466,13 +468,13 @@
   align-items: center;
   gap: 8px;
 }
-.trip-modal .signature-content .highlights {
+.signature-content .highlights {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 18px;
 }
-.trip-modal .signature-content .highlights .chip {
+.signature-content .highlights .chip {
   background: #fff;
   border: 1px solid rgba(230, 209, 179, 0.25);
   color: #8C6B4F;
@@ -480,23 +482,29 @@
   border-radius: 999px;
   font-size: 0.85rem;
 }
-.trip-modal .signature-content .itinerary {
+.signature-content .itinerary-section {
   margin-top: 6px;
   margin-bottom: 14px;
 }
-.trip-modal .signature-content .itinerary h3 {
-  margin: 0 0 10px;
+.signature-content .itinerary-section > h3 {
+  margin: 0 0 20px;
   color: #8C6B4F;
   font-weight: 800;
 }
-.trip-modal .signature-content .itinerary .roadmap {
+.signature-content .itinerary-section .itinerary-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.signature-content .itinerary-section .itinerary-roadmap .roadmap {
   position: relative;
   max-width: 980px;
   margin: 0 auto;
   padding: 10px 0 10px;
   list-style: none;
 }
-.trip-modal .signature-content .itinerary .roadmap::before {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap::before {
   content: "";
   position: absolute;
   top: 0;
@@ -508,7 +516,7 @@
   border-radius: 999px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
-.trip-modal .signature-content .itinerary .roadmap::after {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap::after {
   content: "";
   position: absolute;
   top: 0;
@@ -520,7 +528,7 @@
   border-radius: 2px;
   opacity: 0.9;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -528,7 +536,7 @@
   gap: 20px;
   padding: 18px 0;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .dot {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .dot {
   position: absolute;
   left: 50%;
   top: 32px;
@@ -540,7 +548,7 @@
   box-shadow: 0 0 0 5px rgba(230, 209, 179, 0.15);
   animation: pulseRing 2s infinite ease-out;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .dot::after {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .dot::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -548,7 +556,7 @@
   box-shadow: 0 0 0 0 rgba(217, 182, 140, 0.3);
   animation: ringExpand 2.2s infinite ease-out;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .content {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .content {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
@@ -556,26 +564,26 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   max-width: 420px;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .content strong {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .content strong {
   display: block;
   color: #8C6B4F;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .content span {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .content span {
   display: block;
   font-size: 0.95rem;
   color: #555;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop.left .content {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop.left .content {
   grid-column: 1;
   justify-self: end;
   text-align: right;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop.right .content {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop.right .content {
   grid-column: 2;
   justify-self: start;
   text-align: left;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .hover-modal {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .hover-modal {
   position: absolute;
   left: 50%;
   top: -8px;
@@ -591,16 +599,16 @@
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 5;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .hover-modal h4 {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .hover-modal h4 {
   margin: 0 0 6px;
   color: #8C6B4F;
   font-weight: 800;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .hover-modal p {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .hover-modal p {
   margin: 0 0 10px;
   color: #555;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop .hover-modal .btn-primary {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .hover-modal .btn-primary {
   padding: 8px 12px;
   border-radius: 10px;
   background: linear-gradient(135deg, #E6D1B3, #D9B68C);
@@ -608,19 +616,78 @@
   border: 0;
   cursor: pointer;
 }
-.trip-modal .signature-content .itinerary .roadmap .stop:hover .hover-modal, .trip-modal .signature-content .itinerary .roadmap .stop:focus-within .hover-modal {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop:hover .hover-modal, .signature-content .itinerary-section .itinerary-roadmap .roadmap .stop:focus-within .hover-modal {
   opacity: 1;
   transform: translate(-50%, -16px) scale(1);
 }
-.trip-modal .signature-content .itinerary .roadmap .stop:hover .content {
+.signature-content .itinerary-section .itinerary-roadmap .roadmap .stop:hover .content {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
 }
-.trip-modal .signature-content .includes h3 {
+.signature-content .itinerary-section .itinerary-info {
+  position: sticky;
+  top: 100px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.signature-content .itinerary-section .itinerary-info h4 {
+  margin: 0 0 12px;
+  color: #8C6B4F;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.signature-content .itinerary-section .itinerary-info .info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.signature-content .itinerary-section .itinerary-info .info-list li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.signature-content .itinerary-section .itinerary-info .info-list li:last-child {
+  border-bottom: none;
+}
+.signature-content .itinerary-section .itinerary-info .info-list li .info-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signature-content .itinerary-section .itinerary-info .info-list li .info-content {
+  flex: 1;
+}
+.signature-content .itinerary-section .itinerary-info .info-list li .info-content strong {
+  display: block;
+  color: #8C6B4F;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.signature-content .itinerary-section .itinerary-info .info-list li .info-content p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.signature-content .itinerary-section .itinerary-info .travel-advice {
+  margin-bottom: 24px;
+}
+.signature-content .itinerary-section .itinerary-info .practical-details h4 {
+  margin-top: 8px;
+}
+.signature-content .includes h3 {
   margin: 0 0 10px;
   color: #8C6B4F;
   font-weight: 800;
 }
-.trip-modal .signature-content .includes .include-list {
+.signature-content .includes .include-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 8px 14px;
@@ -628,12 +695,12 @@
   padding: 0;
   list-style: none;
 }
-.trip-modal .signature-content .includes .include-list li {
+.signature-content .includes .include-list li {
   position: relative;
   padding-left: 26px;
   color: #444;
 }
-.trip-modal .signature-content .includes .include-list li::before {
+.signature-content .includes .include-list li::before {
   content: "✔";
   position: absolute;
   left: 0;
@@ -641,11 +708,11 @@
   color: #E6D1B3;
   font-weight: 700;
 }
-.trip-modal .signature-content .includes .note {
+.signature-content .includes .note {
   color: #666;
   margin: 0 0 10px;
 }
-.trip-modal .signature-content .includes .btn-primary {
+.signature-content .includes .btn-primary {
   padding: 10px 16px;
   border-radius: 10px;
   background: linear-gradient(135deg, #E6D1B3, #D9B68C);
@@ -654,30 +721,37 @@
   cursor: pointer;
   white-space: nowrap;
 }
+
 @media (max-width: 768px) {
-  .trip-modal .signature-media {
+  .signature-media {
     height: 240px;
   }
-  .trip-modal .signature-content .facts {
+  .signature-content .facts {
     grid-template-columns: 1fr;
   }
-  .trip-modal .signature-content .itinerary .roadmap::before {
+  .signature-content .itinerary-section .itinerary-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .signature-content .itinerary-section .itinerary-roadmap .roadmap::before {
     width: 28px;
   }
-  .trip-modal .signature-content .itinerary .roadmap::after {
+  .signature-content .itinerary-section .itinerary-roadmap .roadmap::after {
     width: 3px;
   }
-  .trip-modal .signature-content .itinerary .stop {
+  .signature-content .itinerary-section .itinerary-roadmap .roadmap .stop {
     grid-template-columns: 1fr;
     padding: 14px 0 22px;
   }
-  .trip-modal .signature-content .itinerary .stop .content {
+  .signature-content .itinerary-section .itinerary-roadmap .roadmap .stop .content {
     max-width: none;
     text-align: left;
     justify-self: stretch;
   }
+  .signature-content .itinerary-section .itinerary-info {
+    position: static;
+  }
 }
-
 /* Désactivation du scroll de fond quand la modal est ouverte */
 body.no-scroll {
   overflow: hidden;

@@ -14,6 +14,8 @@ function SignatureTrip({ data }: Props) {
     facts,
     highlights,
     itinerary,
+    travelAdvice,
+    practicalDetails,
     includes,
     note,
     ctaLabel,
@@ -51,26 +53,66 @@ function SignatureTrip({ data }: Props) {
         )}
 
         {itinerary?.length > 0 && (
-          <div className="itinerary">
+          <div className="itinerary-section">
             <h3>Itinéraire suggéré</h3>
-            <ul className="roadmap" role="list">
-              {itinerary.map((s, idx) => (
-                <li className={`stop ${s.side}`} tabIndex={0} key={`stop-${idx}`}>
-                  <div className="dot" aria-hidden="true" />
-                  <div className="content">
-                    <strong>{s.title}</strong>
-                    {s.subtitle && <span>{s.subtitle}</span>}
+            <div className="itinerary-grid">
+              <div className="itinerary-roadmap">
+                <ul className="roadmap" role="list">
+                  {itinerary.map((s, idx) => (
+                    <li className={`stop ${s.side}`} tabIndex={0} key={`stop-${idx}`}>
+                      <div className="dot" aria-hidden="true" />
+                      <div className="content">
+                        <strong>{s.title}</strong>
+                        {s.subtitle && <span>{s.subtitle}</span>}
+                      </div>
+                      {(s.modalTitle || s.modalText) && (
+                        <div className="hover-modal" role="dialog" aria-modal="false" aria-label={`Détails ${s.title}`}>
+                          {s.modalTitle && <h4>{s.modalTitle}</h4>}
+                          {s.modalText && <p>{s.modalText}</p>}
+                          <button className="btn-primary">Voir le détail</button>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="itinerary-info">
+                {travelAdvice && travelAdvice.length > 0 && (
+                  <div className="travel-advice">
+                    <h4>Conseils voyage</h4>
+                    <ul className="info-list">
+                      {travelAdvice.map((advice, i) => (
+                        <li key={`advice-${i}`}>
+                          <span className="info-icon" aria-hidden="true">{advice.icon}</span>
+                          <div className="info-content">
+                            <strong>{advice.label}</strong>
+                            <p>{advice.text}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  {(s.modalTitle || s.modalText) && (
-                    <div className="hover-modal" role="dialog" aria-modal="false" aria-label={`Détails ${s.title}`}>
-                      {s.modalTitle && <h4>{s.modalTitle}</h4>}
-                      {s.modalText && <p>{s.modalText}</p>}
-                      <button className="btn-primary">Voir le détail</button>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
+                )}
+
+                {practicalDetails && practicalDetails.length > 0 && (
+                  <div className="practical-details">
+                    <h4>Détails pratiques</h4>
+                    <ul className="info-list">
+                      {practicalDetails.map((detail, i) => (
+                        <li key={`detail-${i}`}>
+                          <span className="info-icon" aria-hidden="true">{detail.icon}</span>
+                          <div className="info-content">
+                            <strong>{detail.label}</strong>
+                            <p>{detail.text}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 

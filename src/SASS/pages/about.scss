@@ -1,0 +1,49 @@
+@import'../variables.scss';
+
+
+.about-page{
+    padding: 2rem;
+    background-color: $primary-color;
+    color: white;
+    h1{
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: $third-color;
+        text-align: center;
+    }
+    .about-section{
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        .about-photo{
+            img{
+                width: 400px;
+                height: 400px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 5px solid $third-color;
+
+                &:hover{
+                    background: blur(10px);
+                    transform: scale(1.05);
+                    transition: transform 0.3s ease;
+                }
+            }
+        }
+        .about-content{
+            width: 60%;
+            text-align: center;
+            .about-intro{
+                padding: 1rem;
+                border-top-left-radius: 50px;
+                border-bottom-right-radius: 50px;
+                background-color: white;
+                font-size: 1.2rem;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+                color: $third-color;
+            }
+        }
+        
+    }
+}

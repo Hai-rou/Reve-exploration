@@ -13,6 +13,18 @@ export interface TripItineraryStop {
   modalText?: string;
 }
 
+export interface TravelAdvice {
+  icon: string;
+  label: string;
+  text: string;
+}
+
+export interface PracticalDetails {
+  icon: string;
+  label: string;
+  text: string;
+}
+
 export interface Trip {
   mediaUrl: string;
   mediaAlt: string;
@@ -22,6 +34,8 @@ export interface Trip {
   facts: TripFact[];
   highlights: string[];
   itinerary: TripItineraryStop[];
+  travelAdvice?: TravelAdvice[];
+  practicalDetails?: PracticalDetails[];
   includes: string[];
   note?: string;
   ctaLabel?: string;
