@@ -1,0 +1,108 @@
+@import "../variables";
+
+.contact-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: $primary-color;
+  }
+
+  .card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: $third-color;
+    font-weight: 700;
+  }
+
+  .description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .card-info {
+    font-size: 0.95rem;
+    color: $third-color;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem 1rem;
+    background: $enveloppe-light;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .card-button {
+    background: linear-gradient(135deg, $third-color, darken($third-color, 10%));
+    color: white;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: linear-gradient(135deg, darken($third-color, 5%), darken($third-color, 15%));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+
+    .card-icon {
+      font-size: 3rem;
+      width: 70px;
+      height: 70px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    .description {
+      font-size: 0.95rem;
+    }
+  }
+}
+

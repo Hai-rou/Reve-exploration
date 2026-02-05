@@ -162,7 +162,7 @@ function Homepage() {
 
       {/* Prendre rendez‑vous */}
       <section className="cta-booking">
-        <h2>Parlez à un conseiller voyage</h2>
+        <h2>Parlons de votre projet de voyage</h2>
         <p>On construit votre itinéraire idéal en 20 minutes.</p>
         <button className="btn-primary">Prendre un rendez‑vous</button>
       </section>

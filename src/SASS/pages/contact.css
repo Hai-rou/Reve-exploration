@@ -1,0 +1,154 @@
+:root {
+  --header-height: 120px;
+  --header-gap: 12px;
+}
+
+.contact-page .contact-hero {
+  background-image: url("/image/sunset-7133867.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.contact-page .contact-hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 1;
+}
+.contact-page .contact-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: white;
+  clip-path: ellipse(75% 100% at 50% 100%);
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .contact-page .contact-hero::after {
+    height: 50px;
+  }
+}
+.contact-page .contact-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 2rem;
+}
+.contact-page .contact-hero .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  .contact-page .contact-hero .hero-content h1 {
+    font-size: 2rem;
+  }
+}
+.contact-page .contact-hero .hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  .contact-page .contact-hero .hero-content p {
+    font-size: 1.1rem;
+  }
+}
+.contact-page .contact-hero .hero-content button {
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  color: #8C6B4F;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.contact-page .contact-hero .hero-content button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #D9B68C, #E6D1B3);
+}
+.contact-page .contact-hero .hero-content button:active {
+  transform: translateY(-1px);
+}
+.contact-page .contact-methods {
+  padding: 6rem 2rem 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(180deg, rgba(251, 240, 225, 0.3) 0%, transparent 50%);
+}
+.contact-page .contact-methods h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #8C6B4F;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .contact-page .contact-methods h2 {
+    font-size: 2rem;
+  }
+}
+.contact-page .contact-methods > p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+.contact-page .contact-methods .methods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+@media (max-width: 1024px) {
+  .contact-page .contact-methods .methods-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .contact-page .contact-methods .methods-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+.contact-page .contact-form-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4rem;
+}
+.contact-page .contact-form-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #8C6B4F;
+  font-weight: 700;
+}
+.contact-page .contact-form-section > p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+}/*# sourceMappingURL=contact.css.map */

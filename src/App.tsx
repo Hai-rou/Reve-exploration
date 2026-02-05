@@ -5,6 +5,8 @@ import Header from "./components/layouts/Header.tsx";
 import Footer from "./components/layouts/Footer.tsx";
 import Banner from "./components/Items/Banner.tsx";
 import Homeintro from "./pages/Homeintro.tsx";
+import ScrollToTop from "./components/layouts/ScrollToTop.tsx";
+
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
         <Homeintro onEnter={() => setShowIntro(false)} />
       ) : (
         <BrowserRouter basename={import.meta.env.BASE_URL}>
+          <ScrollToTop />
           <Header />
           <Banner />
           <AppRoutes />
