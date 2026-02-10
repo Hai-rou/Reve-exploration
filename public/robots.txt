@@ -1,0 +1,8 @@
+# robots.txt pour Rêve d'Exploration
+# Autoriser tous les robots à indexer tout le site
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://reve-exploration.vercel.app/sitemap.xml

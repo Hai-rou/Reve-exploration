@@ -6,6 +6,7 @@ import SignatureTrip from "../components/Items/SignatureTrip";
 import { signatureTripWestCoast } from "../data/trips";
 import { fetchTripsSupabase } from "../lib/supabaseTrips";
 import type { Trip } from "../types/trip";
+import { Link } from "react-router";
 
 function Homepage() {
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1);
@@ -164,7 +165,7 @@ function Homepage() {
       <section className="cta-booking">
         <h2>Parlons de votre projet de voyage</h2>
         <p>On construit votre itinéraire idéal en 20 minutes.</p>
-        <button className="btn-primary">Prendre un rendez‑vous</button>
+        <Link to="/contact" className="btn-primary">Prendre un rendez‑vous</Link>
       </section>
 
       {/* Newsletter */}
@@ -183,7 +184,7 @@ function Homepage() {
         <div className="faq-list">
           <details>
             <summary>Comment se passe la personnalisation du voyage ?</summary>
-            <p>Un conseiller échange avec vous (visio/téléphone) puis fixe un rendez‑vous à domicile.</p>
+            <p>Envoyer moi un SMS ou un mail ici <Link to="/contact" className="btn-primary">Contact</Link>.</p>
           </details>
           <details>
             <summary>Proposez‑vous une assistance 24/7 ?</summary>
@@ -191,7 +192,7 @@ function Homepage() {
           </details>
           <details>
             <summary>Peut‑on payer en plusieurs fois ?</summary>
-            <p>Oui, nous proposons des facilités de paiement selon le montant et les dates.</p>
+            <p>Oui, je propose des solutions pour faciliter le paiement selon le montant et les dates.</p>
           </details>
         </div>
       </section>
