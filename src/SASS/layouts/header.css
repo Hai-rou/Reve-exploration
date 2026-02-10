@@ -97,6 +97,9 @@ header nav ul .login-button:focus-visible {
 header nav ul li {
   position: relative;
 }
+header nav ul li.nav-item-with-mega {
+  position: relative;
+}
 header nav ul li a {
   display: block;
   color: #8C6B4F;

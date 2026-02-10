@@ -13,7 +13,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/destinations" element={<Destination />} />
+      <Route path="/destination" element={<Destination />} />
       <Route path="/infrance" element={<Infrance />} />
       <Route path="/about" element={<About />} />
       <Route path="/admin" element={<Admin />} />

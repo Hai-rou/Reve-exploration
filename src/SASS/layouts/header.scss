@@ -110,6 +110,11 @@ header {
             li {
                 position: relative;
                 
+                // Support pour le mega menu
+                &.nav-item-with-mega {
+                    position: relative;
+                }
+                
                 a {
                     display: block;
                     color: $third-color;

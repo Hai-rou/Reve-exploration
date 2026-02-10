@@ -1,0 +1,172 @@
+:root {
+  --header-height: 120px;
+  --header-gap: 12px;
+}
+
+.mega-menu {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 30px 6%;
+  z-index: 1000;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mega-menu .tags {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.mega-menu .tags button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid rgba(230, 209, 179, 0.3);
+  background: white;
+  color: #8C6B4F;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.mega-menu .tags button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #E6D1B3;
+}
+.mega-menu .tags button.active {
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+.mega-menu .destinations-grid {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.mega-menu .destinations-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.mega-menu .destinations-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+.mega-menu .destinations-grid::-webkit-scrollbar-thumb {
+  background: #E6D1B3;
+  border-radius: 3px;
+}
+.mega-menu .destinations-grid .dest-card-mini {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  height: 180px;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+.mega-menu .destinations-grid .dest-card-mini:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+.mega-menu .destinations-grid .dest-card-mini:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.85);
+}
+.mega-menu .destinations-grid .dest-card-mini:hover span {
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+}
+.mega-menu .destinations-grid .dest-card-mini img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.4s ease;
+  filter: brightness(0.95);
+}
+.mega-menu .destinations-grid .dest-card-mini span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+.mega-menu .view-all-btn {
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #E6D1B3, #D9B68C);
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.mega-menu .view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(135deg, rgb(223.6881188119, 197.3861386139, 159.8118811881), rgb(210.6666666667, 169.8333333333, 120.8333333333));
+}
+@media (max-width: 768px) {
+  .mega-menu {
+    padding: 20px 4%;
+  }
+  .mega-menu .tags {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .mega-menu .tags button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  .mega-menu .destinations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .mega-menu .destinations-grid .dest-card-mini {
+    height: 140px;
+  }
+  .mega-menu .destinations-grid .dest-card-mini span {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}/*# sourceMappingURL=destinationMegaMenu.css.map */

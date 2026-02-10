@@ -1,5 +1,6 @@
 import "../../SASS/layouts/header.scss"
-import { Link } from "react-router-dom";
+import DestinationMegaMenu from "../Items/DestinationMegaMenu";
+import { Link } from "react-router";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { supabase, supabaseLogin, supabaseLogout, getCurrentUserWithRole } from "../../lib/supabase";
@@ -16,6 +17,23 @@ function Header() {
 
   const handleLogin = () => setIsLoginOpen(true);
   const closeLogin = () => { setIsLoginOpen(false); setErrorMsg(null); };
+
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const closeTimeoutRef = useRef<number | null>(null);
+
+  const handleMegaMenuEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsMegaMenuOpen(true);
+  };
+
+  const handleMegaMenuLeave = () => {
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setIsMegaMenuOpen(false);
+    }, 200); // 200ms de délai
+  };
 
   useEffect(() => {
     if (isLoginOpen) emailRef.current?.focus();
@@ -82,12 +100,19 @@ function Header() {
       <nav>
         <ul>
           <li><Link to="/">Accueil</Link></li>
-          <li><Link to="/destinations">Destinations</Link></li>
+          <li className="nav-item-with-mega">
+            <div
+              onMouseEnter={handleMegaMenuEnter}
+              onMouseLeave={handleMegaMenuLeave}
+            >
+              <Link to="/destinations">Destinations</Link>
+              <DestinationMegaMenu isOpen={isMegaMenuOpen} />
+            </div>
+          </li>
           <li><Link to="/infrance">Voyages en France</Link></li>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/about">À Propos</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          
           {me ? (
             <>
               {me.role?.toLowerCase() === "admin" && (
